@@ -17,10 +17,9 @@ public class CityPlannerCreativeTabs {
     public static final RegistryObject<CreativeModeTab> EXAMPLE_TAB = TABS.register("example_tab", () ->
             CreativeModeTab.builder()
                     .withTabsBefore(CreativeModeTabs.COMBAT)
-                    .icon(() -> CityPlannerItems.EXAMPLE_ITEM.get().getDefaultInstance())
+                    .icon(() -> CityPlannerItems.CITY_FOUNDATION_ITEM.get().getDefaultInstance())
                     .displayItems((parameters, output) -> {
-                        output.accept(CityPlannerItems.EXAMPLE_ITEM.get());
-                        output.accept(CityPlannerItems.EXAMPLE_BLOCK_ITEM.get());
+                        output.accept(CityPlannerItems.CITY_FOUNDATION_ITEM.get());
                     }).build());
 
 }

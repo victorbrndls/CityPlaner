@@ -2,7 +2,6 @@ package com.victorbrndls.cityplanner.item;
 
 import com.victorbrndls.cityplanner.CityPlannerMod;
 import com.victorbrndls.cityplanner.block.CityPlannerBlocks;
-import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.DeferredRegister;
@@ -15,18 +14,8 @@ public class CityPlannerItems {
             ForgeRegistries.ITEMS, CityPlannerMod.MODID
     );
 
-    public static final RegistryObject<Item> EXAMPLE_BLOCK_ITEM = ITEMS.register("example_block", () ->
-            new BlockItem(CityPlannerBlocks.EXAMPLE_BLOCK.get(), new Item.Properties())
-    );
-
-    public static final RegistryObject<Item> EXAMPLE_ITEM = ITEMS.register("example_item", () ->
-            new Item(new Item.Properties().food(
-                    new FoodProperties.Builder()
-                            .alwaysEat()
-                            .nutrition(1)
-                            .saturationMod(2f)
-                            .build())
-            )
+    public static final RegistryObject<Item> CITY_FOUNDATION_ITEM = ITEMS.register("city_foundation", () ->
+            new BlockItem(CityPlannerBlocks.CITY_FOUNDATION_BLOCK.get(), new Item.Properties().stacksTo(1))
     );
 
 }
