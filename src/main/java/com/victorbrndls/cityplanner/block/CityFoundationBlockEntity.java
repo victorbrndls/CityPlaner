@@ -25,7 +25,7 @@ public class CityFoundationBlockEntity extends BlockEntity {
         Level level = getLevel();
         if (level == null || level.isClientSide) return;
 
-        city = new City(getBlockPos(), this::setChanged);
+        city = new City(level, getBlockPos(), this::setChanged);
         CityPlannerMod.citiesController.addCity(city);
     }
 

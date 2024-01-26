@@ -2,23 +2,29 @@ package com.victorbrndls.cityplanner.city;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.Level;
 
 public class City {
 
     private static int lastId = 0;
 
     private final int id;
+    private final Level level;
     private final BlockPos position;
     private final Runnable changed;
 
     private static final String PERSISTENT_DATA_KEY = "CityData";
     private CompoundTag persistentData = new CompoundTag();
 
+    private int currentTick = 0;
+
     public City(
+            Level level,
             BlockPos position,
             Runnable changed
     ) {
         this.id = lastId++;
+        this.level = level;
         this.position = position;
         this.changed = changed;
     }
@@ -32,9 +38,39 @@ public class City {
     }
 
     public void tick() {
+        tick1();
+        if (currentTick % 5 == 0) tick5();
+        if (currentTick % 10 == 0) tick10();
+        if (currentTick % 20 == 0) tick20();
+        if (currentTick % 40 == 0) tick40();
+        if (currentTick % 60 == 0) tick60();
 
+        currentTick++;
+        changed.run(); // TODO: how to improve this?
+    }
 
-        changed.run();
+    private void tick1() {
+
+    }
+
+    private void tick5() {
+
+    }
+
+    private void tick10() {
+
+    }
+
+    private void tick20() {
+
+    }
+
+    private void tick40() {
+
+    }
+
+    private void tick60() {
+
     }
 
     public void load(CompoundTag pTag) {
