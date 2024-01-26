@@ -28,6 +28,13 @@ public class CitiesController {
         }
     }
 
+    public void removeCity(City city) {
+        synchronized (this) {
+            cities.remove(city);
+            CityPlannerMod.LOGGER.info("- Removed city #" + city.getId());
+        }
+    }
+
     public void tick() {
         cities.forEach(City::tick);
     }
