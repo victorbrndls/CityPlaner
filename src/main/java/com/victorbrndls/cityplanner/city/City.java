@@ -4,6 +4,9 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.Level;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class City {
 
     private static int lastId = 0;
@@ -15,6 +18,8 @@ public class City {
 
     private static final String PERSISTENT_DATA_KEY = "CityData";
     private CompoundTag persistentData = new CompoundTag();
+
+    private final List<Industry> industries = new ArrayList<>();
 
     private int currentTick = 0;
 
@@ -37,6 +42,10 @@ public class City {
         return position;
     }
 
+    public void addIndustry(Industry industry) {
+        industries.add(industry);
+    }
+
     public void tick() {
         tick1();
         if (currentTick % 5 == 0) tick5();
@@ -46,6 +55,8 @@ public class City {
         if (currentTick % 60 == 0) tick60();
 
         currentTick++;
+        if (currentTick == 61) currentTick = 0;
+
         changed.run(); // TODO: how to improve this?
     }
 
@@ -54,7 +65,7 @@ public class City {
     }
 
     private void tick5() {
-
+        industries.forEach(Industry::tick);
     }
 
     private void tick10() {

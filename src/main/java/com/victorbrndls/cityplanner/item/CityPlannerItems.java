@@ -18,4 +18,8 @@ public class CityPlannerItems {
             new BlockItem(CityPlannerBlocks.CITY_FOUNDATION_BLOCK.get(), new Item.Properties().stacksTo(1))
     );
 
+    public static final RegistryObject<Item> LUMBER_MILL_ITEM = ITEMS.register("lumber_mill", () ->
+            new BlockItem(CityPlannerBlocks.LUMBER_MILL_BLOCK.get(), new Item.Properties())
+    );
+
 }

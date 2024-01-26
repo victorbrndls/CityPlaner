@@ -20,6 +20,7 @@ public class CityPlannerCreativeTabs {
                     .icon(() -> CityPlannerItems.CITY_FOUNDATION_ITEM.get().getDefaultInstance())
                     .displayItems((parameters, output) -> {
                         output.accept(CityPlannerItems.CITY_FOUNDATION_ITEM.get());
+                        output.accept(CityPlannerItems.LUMBER_MILL_ITEM.get());
                     }).build());
 
 }
