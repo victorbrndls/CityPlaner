@@ -47,11 +47,15 @@ public class CitiesController {
         }
     }
 
+    public boolean hasCityInRange(BlockPos pos) {
+        return cities.stream().anyMatch(city -> isCityInRange(city, pos));
+    }
+
     private static boolean isCityInRange(City city, BlockPos pos) {
         double xDiff = Math.abs(city.getPosition().getX() - pos.getX());
         double zDiff = Math.abs(city.getPosition().getZ() - pos.getZ());
 
-        return xDiff < 250 && zDiff < 250;
+        return xDiff < 10 && zDiff < 10;
     }
 
     public void tick() {
