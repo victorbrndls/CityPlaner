@@ -43,10 +43,6 @@ public class City {
         return position;
     }
 
-    public void addIndustry(Industry industry) {
-        industries.add(industry);
-    }
-
     public void tick() {
         tick1();
         if (currentTick % 5 == 0) tick5();
@@ -57,8 +53,6 @@ public class City {
 
         currentTick++;
         if (currentTick == 61) currentTick = 0;
-
-        changed.run(); // TODO: how to improve this?
     }
 
     private void tick1() {
@@ -74,7 +68,7 @@ public class City {
     }
 
     private void tick20() {
-
+        changed.run(); // TODO: how to improve this?
     }
 
     private void tick40() {
@@ -83,6 +77,14 @@ public class City {
 
     private void tick60() {
 
+    }
+
+    public void addIndustry(Industry industry) {
+        industries.add(industry);
+    }
+
+    public void removeIndustry(Industry industry) {
+        industries.remove(industry);
     }
 
     private long getResourceCount(CityResource resource) {

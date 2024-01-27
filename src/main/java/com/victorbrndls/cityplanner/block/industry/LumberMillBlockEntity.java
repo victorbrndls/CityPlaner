@@ -58,7 +58,8 @@ public class LumberMillBlockEntity extends BlockEntity implements Industry {
         Level level = getLevel();
         if (level == null || level.isClientSide) return;
 
-        // remove from city
+        if (city == null) return;
+        city.removeIndustry(this);
     }
 
     @Override
