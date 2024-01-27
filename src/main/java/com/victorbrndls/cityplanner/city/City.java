@@ -24,6 +24,8 @@ public class City {
 
     private final List<Residence> residences = new ArrayList<>();
 
+    private final CityResourceManager resourceManager = new CityResourceManager(industries);
+
     private int currentTick = 0;
 
     public City(
@@ -99,10 +101,8 @@ public class City {
         residences.remove(residence);
     }
 
-    private long getResourceCount(Resource resource) {
-        return industries.stream()
-                .mapToLong(industry -> industry.getResourceCount(resource))
-                .sum();
+    public boolean tryConsume(Resource resource, int amount) {
+        return resourceManager.tryConsume(resource, amount);
     }
 
     public void load(CompoundTag pTag) {
