@@ -48,39 +48,15 @@ public class City {
     }
 
     public void tick() {
-        tick1();
-        if (currentTick % 5 == 0) tick5();
-        if (currentTick % 10 == 0) tick10();
-        if (currentTick % 20 == 0) tick20();
-        if (currentTick % 40 == 0) tick40();
-        if (currentTick % 60 == 0) tick60();
+        industries.forEach(Industry::tick);
+        residences.forEach(Residence::tick);
+
+        if (currentTick == 20) {
+            changed.run(); // TODO: how to improve this?
+        }
 
         currentTick++;
         if (currentTick == 61) currentTick = 0;
-    }
-
-    private void tick1() {
-
-    }
-
-    private void tick5() {
-        industries.forEach(Industry::tick);
-    }
-
-    private void tick10() {
-        residences.forEach(Residence::tick);
-    }
-
-    private void tick20() {
-        changed.run(); // TODO: how to improve this?
-    }
-
-    private void tick40() {
-
-    }
-
-    private void tick60() {
-
     }
 
     // Industry

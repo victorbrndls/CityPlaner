@@ -3,8 +3,8 @@ package com.victorbrndls.cityplanner.block.industry;
 import com.victorbrndls.cityplanner.CityPlannerMod;
 import com.victorbrndls.cityplanner.block.CityPlannerBlockEntities;
 import com.victorbrndls.cityplanner.city.City;
-import com.victorbrndls.cityplanner.city.Resource;
 import com.victorbrndls.cityplanner.city.Industry;
+import com.victorbrndls.cityplanner.city.Resource;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.Level;
@@ -28,7 +28,7 @@ public class LumberMillBlockEntity extends BlockEntity implements Industry {
     public void tick() {
         currentTick++;
 
-        if (currentTick == 16) {
+        if (currentTick == 80) {
             currentTick = 0;
 
             if (plankAmount < maxStorage) {
@@ -41,6 +41,11 @@ public class LumberMillBlockEntity extends BlockEntity implements Industry {
     public Long getResourceCount(Resource resource) {
         if (resource == Resource.PLANK) return plankAmount;
         return 0L;
+    }
+
+    @Override
+    public void consumeResource(Resource resource, int amount) {
+        if (resource == Resource.PLANK) plankAmount -= amount;
     }
 
     @Override

@@ -28,11 +28,11 @@ public class VegetableFarmBlockEntity extends BlockEntity implements Industry {
     public void tick() {
         currentTick++;
 
-        if (currentTick == 16) {
+        if (currentTick == 20) {
             currentTick = 0;
 
             if (vegetableAmount < maxStorage) {
-                vegetableAmount++;
+                vegetableAmount += 2;
             }
         }
     }
@@ -41,6 +41,11 @@ public class VegetableFarmBlockEntity extends BlockEntity implements Industry {
     public Long getResourceCount(Resource resource) {
         if (resource == Resource.VEGETABLE) return vegetableAmount;
         return 0L;
+    }
+
+    @Override
+    public void consumeResource(Resource resource, int amount) {
+        if (resource == Resource.VEGETABLE) vegetableAmount -= amount;
     }
 
     @Override
