@@ -3,6 +3,7 @@ package com.victorbrndls.cityplanner.block;
 import com.victorbrndls.cityplanner.CityPlannerMod;
 import com.victorbrndls.cityplanner.block.housing.ResidenceLevel1Block;
 import com.victorbrndls.cityplanner.block.industry.LumberMillBlock;
+import com.victorbrndls.cityplanner.block.industry.VegetableFarmBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -21,6 +22,9 @@ public class CityPlannerBlocks {
     // Industry
     public static final RegistryObject<Block> LUMBER_MILL_BLOCK = BLOCKS.register("lumber_mill",
             LumberMillBlock::new
+    );
+    public static final RegistryObject<Block> VEGETABLE_FARM_BLOCK = BLOCKS.register("vegetable_farm",
+            VegetableFarmBlock::new
     );
 
     // Housing

@@ -22,6 +22,9 @@ public class CityPlannerItems {
     public static final RegistryObject<Item> LUMBER_MILL_ITEM = ITEMS.register("lumber_mill", () ->
             new BlockItem(CityPlannerBlocks.LUMBER_MILL_BLOCK.get(), new Item.Properties())
     );
+    public static final RegistryObject<Item> VEGETABLE_FARM_ITEM = ITEMS.register("vegetable_farm", () ->
+            new BlockItem(CityPlannerBlocks.VEGETABLE_FARM_BLOCK.get(), new Item.Properties())
+    );
 
     // Housing
     public static final RegistryObject<Item> RESIDENCE_LEVEL_1 = ITEMS.register("residence_level_1", () ->

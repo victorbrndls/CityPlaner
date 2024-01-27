@@ -3,6 +3,7 @@ package com.victorbrndls.cityplanner.block;
 import com.victorbrndls.cityplanner.CityPlannerMod;
 import com.victorbrndls.cityplanner.block.housing.ResidenceLevel1BlockEntity;
 import com.victorbrndls.cityplanner.block.industry.LumberMillBlockEntity;
+import com.victorbrndls.cityplanner.block.industry.VegetableFarmBlockEntity;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -24,6 +25,8 @@ public class CityPlannerBlockEntities {
     // Industry
     public static final RegistryObject<BlockEntityType<LumberMillBlockEntity>> LUMBER_MILL_BLOCK_ENTITY =
             register("lumber_mill", LumberMillBlockEntity::new, CityPlannerBlocks.LUMBER_MILL_BLOCK);
+    public static final RegistryObject<BlockEntityType<VegetableFarmBlockEntity>> VEGETABLE_FARM_BLOCK_ENTITY =
+            register("vegetable_farm", VegetableFarmBlockEntity::new, CityPlannerBlocks.VEGETABLE_FARM_BLOCK);
 
     // Housing
     public static final RegistryObject<BlockEntityType<ResidenceLevel1BlockEntity>> RESIDENCE_LEVEL_1_BLOCK_ENTITY =
