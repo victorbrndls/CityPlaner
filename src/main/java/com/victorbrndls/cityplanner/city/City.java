@@ -19,6 +19,7 @@ public class City {
     private static final String PERSISTENT_DATA_KEY = "CityData";
     private CompoundTag persistentData = new CompoundTag();
 
+    // City related
     private final List<Industry> industries = new ArrayList<>();
 
     private int currentTick = 0;
@@ -82,6 +83,12 @@ public class City {
 
     private void tick60() {
 
+    }
+
+    private long getResourceCount(CityResource resource) {
+        return industries.stream()
+                .mapToLong(industry -> industry.getResourceCount(resource))
+                .sum();
     }
 
     public void load(CompoundTag pTag) {

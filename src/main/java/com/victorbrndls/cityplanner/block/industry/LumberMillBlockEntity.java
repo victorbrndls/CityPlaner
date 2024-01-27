@@ -2,6 +2,7 @@ package com.victorbrndls.cityplanner.block.industry;
 
 import com.victorbrndls.cityplanner.CityPlannerMod;
 import com.victorbrndls.cityplanner.city.City;
+import com.victorbrndls.cityplanner.city.CityResource;
 import com.victorbrndls.cityplanner.city.Industry;
 import com.victorbrndls.cityplanner.entity.CityPlannerEntities;
 import net.minecraft.core.BlockPos;
@@ -13,6 +14,9 @@ import net.minecraft.world.level.block.state.BlockState;
 public class LumberMillBlockEntity extends BlockEntity implements Industry {
 
     private City city;
+    private Long plankAmount = 0L;
+
+    private int currentTick = 0;
 
     public LumberMillBlockEntity(BlockPos pPos, BlockState pBlockState) {
         super(CityPlannerEntities.LUMBER_MILL_BLOCK_ENTITY.get(), pPos, pBlockState);
@@ -20,7 +24,18 @@ public class LumberMillBlockEntity extends BlockEntity implements Industry {
 
     @Override
     public void tick() {
+        currentTick++;
 
+        if (currentTick == 8) {
+            currentTick = 0;
+            plankAmount++;
+        }
+    }
+
+    @Override
+    public Long getResourceCount(CityResource resource) {
+        if (resource == CityResource.PLANK) return plankAmount;
+        return 0L;
     }
 
     @Override
@@ -53,7 +68,7 @@ public class LumberMillBlockEntity extends BlockEntity implements Industry {
         Level level = getLevel();
         if (level == null || level.isClientSide) return;
 
-
+        plankAmount = pTag.getLong("plankAmount");
     }
 
     @Override
@@ -63,6 +78,6 @@ public class LumberMillBlockEntity extends BlockEntity implements Industry {
         Level level = getLevel();
         if (level == null || level.isClientSide) return;
 
-
+        pTag.putLong("plankAmount", plankAmount);
     }
 }

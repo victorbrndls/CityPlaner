@@ -4,4 +4,5 @@ public interface Industry {
 
     public void tick();
 
+    public Long getResourceCount(CityResource resource);
 }
