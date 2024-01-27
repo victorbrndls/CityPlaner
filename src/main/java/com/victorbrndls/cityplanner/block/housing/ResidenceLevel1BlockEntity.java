@@ -1,20 +1,33 @@
-package com.victorbrndls.cityplanner.block;
+package com.victorbrndls.cityplanner.block.housing;
 
 import com.victorbrndls.cityplanner.CityPlannerMod;
+import com.victorbrndls.cityplanner.block.CityPlannerBlockEntities;
 import com.victorbrndls.cityplanner.city.City;
+import com.victorbrndls.cityplanner.city.Residence;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class CityFoundationBlockEntity extends BlockEntity {
+public class ResidenceLevel1BlockEntity extends BlockEntity implements Residence {
 
     private City city;
-    private CompoundTag persistentData;
 
-    public CityFoundationBlockEntity(BlockPos pPos, BlockState pBlockState) {
-        super(CityPlannerBlockEntities.CITY_FOUNDATION_BLOCK_ENTITY.get(), pPos, pBlockState);
+    private int currentTick = 0;
+
+    public ResidenceLevel1BlockEntity(BlockPos pPos, BlockState pBlockState) {
+        super(CityPlannerBlockEntities.RESIDENCE_LEVEL_1_BLOCK_ENTITY.get(), pPos, pBlockState);
+    }
+
+    @Override
+    public void tick() {
+        currentTick++;
+
+        if (currentTick == 8) {
+            currentTick = 0;
+
+        }
     }
 
     @Override
@@ -24,8 +37,10 @@ public class CityFoundationBlockEntity extends BlockEntity {
         Level level = getLevel();
         if (level == null || level.isClientSide) return;
 
-        city = new City(level, getBlockPos(), this::setChanged);
-        CityPlannerMod.citiesController.addCity(city);
+        CityPlannerMod.citiesController.getCityInRange(getBlockPos(), (city) -> {
+            city.addResidency(this);
+            this.city = city;
+        });
     }
 
     @Override
@@ -35,7 +50,8 @@ public class CityFoundationBlockEntity extends BlockEntity {
         Level level = getLevel();
         if (level == null || level.isClientSide) return;
 
-        CityPlannerMod.citiesController.removeCity(city);
+        if (city == null) return;
+        city.removeResidency(this);
     }
 
     @Override
@@ -45,7 +61,7 @@ public class CityFoundationBlockEntity extends BlockEntity {
         Level level = getLevel();
         if (level == null || level.isClientSide) return;
 
-        city.load(pTag);
+//        plankAmount = pTag.getLong("plankAmount");
     }
 
     @Override
@@ -55,6 +71,6 @@ public class CityFoundationBlockEntity extends BlockEntity {
         Level level = getLevel();
         if (level == null || level.isClientSide) return;
 
-        city.save(pTag);
+//        pTag.putLong("plankAmount", plankAmount);
     }
 }

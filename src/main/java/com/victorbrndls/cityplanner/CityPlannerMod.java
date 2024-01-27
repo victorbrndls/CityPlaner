@@ -4,14 +4,13 @@ import com.mojang.logging.LogUtils;
 import com.victorbrndls.cityplanner.block.CityPlannerBlocks;
 import com.victorbrndls.cityplanner.city.CitiesController;
 import com.victorbrndls.cityplanner.creative_tab.CityPlannerCreativeTabs;
-import com.victorbrndls.cityplanner.entity.CityPlannerEntities;
+import com.victorbrndls.cityplanner.block.CityPlannerBlockEntities;
 import com.victorbrndls.cityplanner.item.CityPlannerItems;
 import com.victorbrndls.cityplanner.network.NetworkListener;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.level.LevelEvent;
-import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -34,7 +33,7 @@ public class CityPlannerMod {
 
         CityPlannerBlocks.BLOCKS.register(modEventBus);
         CityPlannerItems.ITEMS.register(modEventBus);
-        CityPlannerEntities.BLOCK_ENTITIES.register(modEventBus);
+        CityPlannerBlockEntities.BLOCK_ENTITIES.register(modEventBus);
         CityPlannerCreativeTabs.TABS.register(modEventBus);
 
         // Register ourselves for server and other game events we are interested in

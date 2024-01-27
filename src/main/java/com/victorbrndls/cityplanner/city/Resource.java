@@ -1,5 +1,5 @@
 package com.victorbrndls.cityplanner.city;
 
-public enum CityResource {
+public enum Resource {
     PLANK,
 }

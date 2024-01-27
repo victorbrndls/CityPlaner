@@ -22,6 +22,8 @@ public class City {
     // City related
     private final List<Industry> industries = new ArrayList<>();
 
+    private final List<Residence> residences = new ArrayList<>();
+
     private int currentTick = 0;
 
     public City(
@@ -64,7 +66,7 @@ public class City {
     }
 
     private void tick10() {
-
+        residences.forEach(Residence::tick);
     }
 
     private void tick20() {
@@ -79,6 +81,7 @@ public class City {
 
     }
 
+    // Industry
     public void addIndustry(Industry industry) {
         industries.add(industry);
     }
@@ -87,7 +90,16 @@ public class City {
         industries.remove(industry);
     }
 
-    private long getResourceCount(CityResource resource) {
+    // Housing
+    public void addResidency(Residence residence) {
+        residences.add(residence);
+    }
+
+    public void removeResidency(Residence residence) {
+        residences.remove(residence);
+    }
+
+    private long getResourceCount(Resource resource) {
         return industries.stream()
                 .mapToLong(industry -> industry.getResourceCount(resource))
                 .sum();
@@ -100,4 +112,5 @@ public class City {
     public void save(CompoundTag pTag) {
         if (this.persistentData != null) pTag.put(PERSISTENT_DATA_KEY, this.persistentData.copy());
     }
+
 }

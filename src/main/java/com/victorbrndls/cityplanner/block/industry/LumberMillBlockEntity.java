@@ -1,10 +1,10 @@
 package com.victorbrndls.cityplanner.block.industry;
 
 import com.victorbrndls.cityplanner.CityPlannerMod;
+import com.victorbrndls.cityplanner.block.CityPlannerBlockEntities;
 import com.victorbrndls.cityplanner.city.City;
-import com.victorbrndls.cityplanner.city.CityResource;
+import com.victorbrndls.cityplanner.city.Resource;
 import com.victorbrndls.cityplanner.city.Industry;
-import com.victorbrndls.cityplanner.entity.CityPlannerEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.Level;
@@ -16,25 +16,30 @@ public class LumberMillBlockEntity extends BlockEntity implements Industry {
     private City city;
     private Long plankAmount = 0L;
 
+    private Long maxStorage = 20L;
+
     private int currentTick = 0;
 
     public LumberMillBlockEntity(BlockPos pPos, BlockState pBlockState) {
-        super(CityPlannerEntities.LUMBER_MILL_BLOCK_ENTITY.get(), pPos, pBlockState);
+        super(CityPlannerBlockEntities.LUMBER_MILL_BLOCK_ENTITY.get(), pPos, pBlockState);
     }
 
     @Override
     public void tick() {
         currentTick++;
 
-        if (currentTick == 8) {
+        if (currentTick == 16) {
             currentTick = 0;
-            plankAmount++;
+
+            if (plankAmount < maxStorage) {
+                plankAmount++;
+            }
         }
     }
 
     @Override
-    public Long getResourceCount(CityResource resource) {
-        if (resource == CityResource.PLANK) return plankAmount;
+    public Long getResourceCount(Resource resource) {
+        if (resource == Resource.PLANK) return plankAmount;
         return 0L;
     }
 

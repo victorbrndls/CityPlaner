@@ -1,6 +1,7 @@
 package com.victorbrndls.cityplanner.block;
 
 import com.victorbrndls.cityplanner.CityPlannerMod;
+import com.victorbrndls.cityplanner.block.housing.ResidenceLevel1Block;
 import com.victorbrndls.cityplanner.block.industry.LumberMillBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.registries.DeferredRegister;
@@ -17,8 +18,14 @@ public class CityPlannerBlocks {
             CityFoundationBlock::new
     );
 
+    // Industry
     public static final RegistryObject<Block> LUMBER_MILL_BLOCK = BLOCKS.register("lumber_mill",
             LumberMillBlock::new
+    );
+
+    // Housing
+    public static final RegistryObject<Block> RESIDENCE_LEVEL_1_BLOCK = BLOCKS.register("residence_level_1",
+            ResidenceLevel1Block::new
     );
 
 }

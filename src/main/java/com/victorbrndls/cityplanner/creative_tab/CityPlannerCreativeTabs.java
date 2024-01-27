@@ -19,8 +19,7 @@ public class CityPlannerCreativeTabs {
                     .withTabsBefore(CreativeModeTabs.COMBAT)
                     .icon(() -> CityPlannerItems.CITY_FOUNDATION_ITEM.get().getDefaultInstance())
                     .displayItems((parameters, output) -> {
-                        output.accept(CityPlannerItems.CITY_FOUNDATION_ITEM.get());
-                        output.accept(CityPlannerItems.LUMBER_MILL_ITEM.get());
+                        CityPlannerItems.ITEMS.getEntries().forEach((entry) -> output.accept(entry.get()));
                     }).build());
 
 }
