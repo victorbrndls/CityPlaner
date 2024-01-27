@@ -30,8 +30,10 @@ public class LumberMillBlockEntity extends BlockEntity implements Industry {
         Level level = getLevel();
         if (level == null || level.isClientSide) return;
 
-        city = CityPlannerMod.citiesController.getCityInRange(getBlockPos());
-        city.addIndustry(this);
+        CityPlannerMod.citiesController.getCityInRange(getBlockPos(), (city) -> {
+            city.addIndustry(this);
+            this.city = city;
+        });
     }
 
     @Override
