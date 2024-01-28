@@ -1,6 +1,7 @@
 package com.victorbrndls.cityplanner.block;
 
 import com.victorbrndls.cityplanner.CityPlannerMod;
+import com.victorbrndls.cityplanner.block.foundation.CityFoundationBlock;
 import com.victorbrndls.cityplanner.block.housing.ResidenceLevel1Block;
 import com.victorbrndls.cityplanner.block.industry.LumberMillBlock;
 import com.victorbrndls.cityplanner.block.industry.VegetableFarmBlock;

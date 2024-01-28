@@ -81,6 +81,10 @@ public class City {
         return resourceManager.tryConsume(resource, amount);
     }
 
+    public long getResourceCount(Resource resource) {
+        return resourceManager.getResourceCount(resource);
+    }
+
     public void load(CompoundTag pTag) {
         if (pTag.contains(PERSISTENT_DATA_KEY)) this.persistentData = pTag.getCompound(PERSISTENT_DATA_KEY);
     }

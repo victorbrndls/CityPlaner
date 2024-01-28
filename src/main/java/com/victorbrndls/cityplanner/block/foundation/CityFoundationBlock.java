@@ -1,4 +1,4 @@
-package com.victorbrndls.cityplanner.block;
+package com.victorbrndls.cityplanner.block.foundation;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.Block;

@@ -4,15 +4,23 @@ import com.victorbrndls.cityplanner.CityPlannerMod;
 import com.victorbrndls.cityplanner.block.CityPlannerBlockEntities;
 import com.victorbrndls.cityplanner.city.City;
 import com.victorbrndls.cityplanner.city.Residence;
+import com.victorbrndls.cityplanner.city.Resource;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
+import java.util.Random;
+
 public class ResidenceLevel1BlockEntity extends BlockEntity implements Residence {
 
+    Random random = new Random();
+
     private City city;
+
+    private int residents = 0;
+    private static final int maxResidents = 4;
 
     private int currentTick = 0;
 
@@ -24,9 +32,28 @@ public class ResidenceLevel1BlockEntity extends BlockEntity implements Residence
     public void tick() {
         currentTick++;
 
-        if (currentTick == 8) {
+        if (currentTick == 40) {
             currentTick = 0;
 
+            eat();
+            spawnNewResident();
+        }
+    }
+
+    private void spawnNewResident() {
+        if (residents < maxResidents) {
+            if (random.nextInt(0, 15) == 0) {
+                // At least 10 vegetables required
+                if (city.tryConsume(Resource.VEGETABLE, 10)) {
+                    residents++;
+                }
+            }
+        }
+    }
+
+    private void eat() {
+        for (int i = 0; i < residents; i++) {
+            city.tryConsume(Resource.VEGETABLE, 1);
         }
     }
 
@@ -61,7 +88,8 @@ public class ResidenceLevel1BlockEntity extends BlockEntity implements Residence
         Level level = getLevel();
         if (level == null || level.isClientSide) return;
 
-//        plankAmount = pTag.getLong("plankAmount");
+        currentTick = pTag.getInt("currentTick");
+        residents = pTag.getInt("residents");
     }
 
     @Override
@@ -71,6 +99,7 @@ public class ResidenceLevel1BlockEntity extends BlockEntity implements Residence
         Level level = getLevel();
         if (level == null || level.isClientSide) return;
 
-//        pTag.putLong("plankAmount", plankAmount);
+        pTag.putInt("currentTick", currentTick);
+        pTag.putInt("residents", residents);
     }
 }

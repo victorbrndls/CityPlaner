@@ -1,6 +1,7 @@
-package com.victorbrndls.cityplanner.block;
+package com.victorbrndls.cityplanner.block.foundation;
 
 import com.victorbrndls.cityplanner.CityPlannerMod;
+import com.victorbrndls.cityplanner.block.CityPlannerBlockEntities;
 import com.victorbrndls.cityplanner.city.City;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;

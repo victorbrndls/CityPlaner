@@ -14,8 +14,8 @@ import net.minecraft.world.level.block.state.BlockState;
 public class LumberMillBlockEntity extends BlockEntity implements Industry {
 
     private City city;
-    private Long plankAmount = 0L;
 
+    private Long plankAmount = 0L;
     private Long maxStorage = 20L;
 
     private int currentTick = 0;

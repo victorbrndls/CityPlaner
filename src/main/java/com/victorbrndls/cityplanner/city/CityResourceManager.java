@@ -24,6 +24,7 @@ public class CityResourceManager {
     }
 
     public long getResourceCount(Resource resource) {
+        // TODO: improve this
         return industries.stream()
                 .mapToLong(industry -> industry.getResourceCount(resource))
                 .sum();
