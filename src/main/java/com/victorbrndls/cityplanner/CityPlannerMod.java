@@ -1,14 +1,16 @@
 package com.victorbrndls.cityplanner;
 
 import com.mojang.logging.LogUtils;
+import com.victorbrndls.cityplanner.block.CityPlannerBlockEntities;
 import com.victorbrndls.cityplanner.block.CityPlannerBlocks;
 import com.victorbrndls.cityplanner.city.CitiesController;
 import com.victorbrndls.cityplanner.creative_tab.CityPlannerCreativeTabs;
-import com.victorbrndls.cityplanner.block.CityPlannerBlockEntities;
+import com.victorbrndls.cityplanner.gui.CityStatsRenderer;
 import com.victorbrndls.cityplanner.item.CityPlannerItems;
 import com.victorbrndls.cityplanner.network.NetworkListener;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.RenderGuiEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.level.LevelEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -54,6 +56,11 @@ public class CityPlannerMod {
                 LOGGER.info("Created controller");
             }
         }
+    }
+
+    @SubscribeEvent
+    public void guiRendered(final RenderGuiEvent.Post event) {
+        CityStatsRenderer.render(event.getGuiGraphics(), event.getPartialTick());
     }
 
     // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent

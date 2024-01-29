@@ -31,4 +31,9 @@ public class CityPlannerItems {
             new BlockItem(CityPlannerBlocks.RESIDENCE_LEVEL_1_BLOCK.get(), new Item.Properties().stacksTo(1))
     );
 
+    // Generic
+    public static final RegistryObject<Item> CITY_INSPECTOR = ITEMS.register("city_inspector",
+            CityInspector::new
+    );
+
 }
