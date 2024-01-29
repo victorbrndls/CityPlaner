@@ -16,7 +16,7 @@ public record CityStatsMessage(
         return new CityStatsMessage(
                 city.getResourceCount(Resource.PLANK),
                 city.getResourceCount(Resource.VEGETABLE),
-                0
+                city.getResidentCount()
         );
     }
 

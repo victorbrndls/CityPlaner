@@ -35,8 +35,20 @@ public class ResidenceLevel1BlockEntity extends BlockEntity implements Residence
         if (currentTick == 40) {
             currentTick = 0;
 
-            eat();
+            eatOrDie();
             spawnNewResident();
+        }
+    }
+
+    @Override
+    public int getResidentCount() {
+        return residents;
+    }
+
+    private void eatOrDie() {
+        for (int i = 0; i < residents; i++) {
+            var ate = city.tryConsume(Resource.VEGETABLE, 1);
+            if (!ate) killResident();
         }
     }
 
@@ -51,10 +63,8 @@ public class ResidenceLevel1BlockEntity extends BlockEntity implements Residence
         }
     }
 
-    private void eat() {
-        for (int i = 0; i < residents; i++) {
-            city.tryConsume(Resource.VEGETABLE, 1);
-        }
+    private void killResident() {
+        residents--;
     }
 
     @Override

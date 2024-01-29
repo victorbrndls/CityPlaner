@@ -85,6 +85,10 @@ public class City {
         return resourceManager.getResourceCount(resource);
     }
 
+    public int getResidentCount() {
+        return residences.stream().mapToInt(Residence::getResidentCount).sum();
+    }
+
     public void load(CompoundTag pTag) {
         if (pTag.contains(PERSISTENT_DATA_KEY)) this.persistentData = pTag.getCompound(PERSISTENT_DATA_KEY);
     }

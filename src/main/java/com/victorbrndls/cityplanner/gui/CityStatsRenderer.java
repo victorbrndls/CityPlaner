@@ -17,8 +17,8 @@ public class CityStatsRenderer {
         var width = client.getWindow().getGuiScaledWidth();
         var height = client.getWindow().getGuiScaledHeight();
 
-        ctx.drawString(client.font, "planks:" + message.plankAmount(), width / 2, 20, 0xFFFFFF);
-        ctx.drawString(client.font, "vegetables:" + message.vegetableAmount(), width / 2, 29, 0xFFFFFF);
-        ctx.drawString(client.font, "population:" + message.population(), width / 2, 38, 0xFFFFFF);
+        ctx.drawString(client.font, "planks: " + message.plankAmount(), width / 2, 20, 0xFFFFFF);
+        ctx.drawString(client.font, "vegetables: " + message.vegetableAmount(), width / 2, 29, 0xFFFFFF);
+        ctx.drawString(client.font, "population: " + message.population(), width / 2, 38, 0xFFFFFF);
     }
 }
