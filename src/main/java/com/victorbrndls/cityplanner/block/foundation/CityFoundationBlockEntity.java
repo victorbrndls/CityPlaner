@@ -12,7 +12,7 @@ import net.minecraft.world.level.block.state.BlockState;
 public class CityFoundationBlockEntity extends BlockEntity {
 
     private City city;
-    private CompoundTag persistentData;
+    private CompoundTag persistentData = new CompoundTag();
 
     public CityFoundationBlockEntity(BlockPos pPos, BlockState pBlockState) {
         super(CityPlannerBlockEntities.CITY_FOUNDATION_BLOCK_ENTITY.get(), pPos, pBlockState);
@@ -27,6 +27,7 @@ public class CityFoundationBlockEntity extends BlockEntity {
 
         city = new City(level, getBlockPos(), this::setChanged);
         CityPlannerMod.citiesController.addCity(city);
+        city.load(persistentData);
     }
 
     @Override
@@ -42,20 +43,12 @@ public class CityFoundationBlockEntity extends BlockEntity {
     @Override
     public void load(CompoundTag pTag) {
         super.load(pTag);
-
-        Level level = getLevel();
-        if (level == null || level.isClientSide) return;
-
-        city.load(pTag);
+        this.persistentData = pTag;
     }
 
     @Override
     protected void saveAdditional(CompoundTag pTag) {
         super.saveAdditional(pTag);
-
-        Level level = getLevel();
-        if (level == null || level.isClientSide) return;
-
         city.save(pTag);
     }
 }

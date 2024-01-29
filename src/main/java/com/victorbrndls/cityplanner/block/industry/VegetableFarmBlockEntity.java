@@ -33,6 +33,7 @@ public class VegetableFarmBlockEntity extends BlockEntity implements Industry {
 
             if (vegetableAmount < maxStorage) {
                 vegetableAmount += 2;
+                setChanged();
             }
         }
     }
@@ -75,20 +76,14 @@ public class VegetableFarmBlockEntity extends BlockEntity implements Industry {
     @Override
     public void load(CompoundTag pTag) {
         super.load(pTag);
-
-        Level level = getLevel();
-        if (level == null || level.isClientSide) return;
-
+        currentTick = pTag.getInt("currentTick");
         vegetableAmount = pTag.getLong("vegetableAmount");
     }
 
     @Override
     protected void saveAdditional(CompoundTag pTag) {
         super.saveAdditional(pTag);
-
-        Level level = getLevel();
-        if (level == null || level.isClientSide) return;
-
+        pTag.putInt("currentTick", currentTick);
         pTag.putLong("vegetableAmount", vegetableAmount);
     }
 }

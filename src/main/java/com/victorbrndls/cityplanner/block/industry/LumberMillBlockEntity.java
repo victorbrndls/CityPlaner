@@ -33,6 +33,7 @@ public class LumberMillBlockEntity extends BlockEntity implements Industry {
 
             if (plankAmount < maxStorage) {
                 plankAmount++;
+                setChanged();
             }
         }
     }
@@ -75,20 +76,14 @@ public class LumberMillBlockEntity extends BlockEntity implements Industry {
     @Override
     public void load(CompoundTag pTag) {
         super.load(pTag);
-
-        Level level = getLevel();
-        if (level == null || level.isClientSide) return;
-
+        currentTick = pTag.getInt("currentTick");
         plankAmount = pTag.getLong("plankAmount");
     }
 
     @Override
     protected void saveAdditional(CompoundTag pTag) {
         super.saveAdditional(pTag);
-
-        Level level = getLevel();
-        if (level == null || level.isClientSide) return;
-
+        pTag.putInt("currentTick", currentTick);
         pTag.putLong("plankAmount", plankAmount);
     }
 }

@@ -58,6 +58,7 @@ public class ResidenceLevel1BlockEntity extends BlockEntity implements Residence
                 // At least 10 vegetables required
                 if (city.tryConsume(Resource.VEGETABLE, 10)) {
                     residents++;
+                    setChanged();
                 }
             }
         }
@@ -65,6 +66,7 @@ public class ResidenceLevel1BlockEntity extends BlockEntity implements Residence
 
     private void killResident() {
         residents--;
+        setChanged();
     }
 
     @Override
@@ -94,10 +96,6 @@ public class ResidenceLevel1BlockEntity extends BlockEntity implements Residence
     @Override
     public void load(CompoundTag pTag) {
         super.load(pTag);
-
-        Level level = getLevel();
-        if (level == null || level.isClientSide) return;
-
         currentTick = pTag.getInt("currentTick");
         residents = pTag.getInt("residents");
     }
@@ -105,10 +103,6 @@ public class ResidenceLevel1BlockEntity extends BlockEntity implements Residence
     @Override
     protected void saveAdditional(CompoundTag pTag) {
         super.saveAdditional(pTag);
-
-        Level level = getLevel();
-        if (level == null || level.isClientSide) return;
-
         pTag.putInt("currentTick", currentTick);
         pTag.putInt("residents", residents);
     }
