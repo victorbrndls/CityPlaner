@@ -1,8 +1,13 @@
 package com.victorbrndls.cityplanner.city;
 
 import com.victorbrndls.cityplanner.CityPlannerMod;
+import com.victorbrndls.cityplanner.network.CityStatsMessage;
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.level.Level;
+import net.minecraftforge.network.PacketDistributor;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -10,6 +15,8 @@ import java.util.Set;
 import java.util.function.Consumer;
 
 public class CitiesController {
+
+    private int currentTick = 0;
 
     private final Set<City> cities = new HashSet<>();
 
@@ -47,6 +54,16 @@ public class CitiesController {
         }
     }
 
+    @Nullable
+    public City getCityInRange(BlockPos pos) {
+        for (var city : cities) {
+            if (isCityInRange(city, pos)) {
+                return city;
+            }
+        }
+        return null;
+    }
+
     public boolean hasCityInRange(BlockPos pos) {
         return cities.stream().anyMatch(city -> isCityInRange(city, pos));
     }
@@ -58,8 +75,26 @@ public class CitiesController {
         return xDiff < 10 && zDiff < 10;
     }
 
-    public void tick() {
+    public void tick(Level level) {
+        currentTick++;
+        if (cities.size() == 0) return;
+
         cities.forEach(City::tick);
+
+        if (currentTick == 40) {
+            currentTick = 0;
+
+            sendCityStatsToClient(level);
+        }
+    }
+
+    private void sendCityStatsToClient(Level level) {
+        for (var player : level.players()) {
+            var city = getCityInRange(player.getOnPos());
+            if (city == null) continue;
+
+            CityPlannerMod.CHANNEL.send(CityStatsMessage.create(city), PacketDistributor.PLAYER.with((ServerPlayer) player));
+        }
     }
 
 }

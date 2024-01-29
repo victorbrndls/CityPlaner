@@ -1,6 +1,5 @@
 package com.victorbrndls.cityplanner.item;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -9,7 +8,6 @@ import net.minecraft.world.level.Level;
 public class CityInspector extends Item {
 
     private int currentTick = 0;
-    private boolean added = false;
 
     public CityInspector() {
         super(new Item.Properties().stacksTo(1));
@@ -21,14 +19,12 @@ public class CityInspector extends Item {
 
         if (!pLevel.isClientSide) return;
 
-        added = true;
+        currentTick++;
 
-//        currentTick++;
-//
-//        if (currentTick == 20) {
-//            currentTick = 0;
-//
-//
-//        }
+        if (currentTick == 20) {
+            currentTick = 0;
+
+
+        }
     }
 }
