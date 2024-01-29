@@ -4,6 +4,8 @@ import com.victorbrndls.cityplanner.network.CityStatsMessage;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 
+import java.util.ArrayList;
+
 public class CityStatsRenderer {
 
     public static CityStatsMessage message = null;
@@ -15,10 +17,32 @@ public class CityStatsRenderer {
         var client = Minecraft.getInstance();
 
         var width = client.getWindow().getGuiScaledWidth();
-        var height = client.getWindow().getGuiScaledHeight();
 
-        ctx.drawString(client.font, "planks: " + message.plankAmount(), width / 2, 20, 0xFFFFFF);
-        ctx.drawString(client.font, "vegetables: " + message.vegetableAmount(), width / 2, 29, 0xFFFFFF);
-        ctx.drawString(client.font, "population: " + message.population(), width / 2, 38, 0xFFFFFF);
+        int startX = (int) (width * 0.2);
+        int endX = (int) (width * 0.8);
+        int startY = 20;
+
+        var strings = new ArrayList<String>();
+        strings.add("planks: " + message.plankAmount());
+        strings.add("vegetables: " + message.vegetableAmount());
+        strings.add("population: " + message.population());
+
+        var lastX = startX;
+        var lastY = startY;
+
+        for (String string : strings) {
+            ctx.drawString(client.font, string, lastX, lastY, 0xFFFFFF);
+
+            var stringWidth = client.font.width(string);
+            var horizontalPadding = 12;
+            var stringHeight = client.font.lineHeight;
+
+            lastX = lastX + stringWidth + horizontalPadding;
+
+            if (lastY > endX) {
+                lastX = startX;
+                lastY = lastY + stringHeight;
+            }
+        }
     }
 }
