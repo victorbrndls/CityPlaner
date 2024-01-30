@@ -3,10 +3,16 @@ package com.victorbrndls.cityplanner.gui;
 import com.victorbrndls.cityplanner.network.CityStatsMessage;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
-
-import java.util.ArrayList;
+import net.minecraft.resources.ResourceLocation;
 
 public class CityStatsRenderer {
+
+    private static final ResourceLocation PLANK_RESOURCE =
+            new ResourceLocation("cityplanner", "textures/gui/resource_plank.png");
+    private static final ResourceLocation VEGETABLE_RESOURCE =
+            new ResourceLocation("cityplanner", "textures/gui/resource_vegetable.png");
+    private static final ResourceLocation RESIDENT_RESOURCE =
+            new ResourceLocation("cityplanner", "textures/gui/resource_resident.png");
 
     public static CityStatsMessage message = null;
 
@@ -19,30 +25,26 @@ public class CityStatsRenderer {
         var width = client.getWindow().getGuiScaledWidth();
 
         int startX = (int) (width * 0.2);
-        int endX = (int) (width * 0.8);
         int startY = 20;
-
-        var strings = new ArrayList<String>();
-        strings.add("planks: " + message.plankAmount());
-        strings.add("vegetables: " + message.vegetableAmount());
-        strings.add("population: " + message.population());
 
         var lastX = startX;
         var lastY = startY;
 
-        for (String string : strings) {
-            ctx.drawString(client.font, string, lastX, lastY, 0xFFFFFF);
+        var stringWidth = client.font.width("0000"); // up to 4 numbers
 
-            var stringWidth = client.font.width(string);
-            var horizontalPadding = 12;
-            var stringHeight = client.font.lineHeight;
+        ctx.blit(PLANK_RESOURCE, lastX, startY, 0, 0, 12, 12, 12, 12);
+        ctx.drawString(client.font, String.valueOf(message.plankAmount()), lastX + 14, startY + 4, 0xFFFFFF);
+        lastX = lastX + 14 + stringWidth;
+        lastY = lastY + 4;
 
-            lastX = lastX + stringWidth + horizontalPadding;
+        ctx.blit(VEGETABLE_RESOURCE, lastX, startY, 0, 0, 12, 12, 12, 12);
+        ctx.drawString(client.font, String.valueOf(message.vegetableAmount()), lastX + 12, lastY, 0xFFFFFF);
+        lastX = lastX + 12 + stringWidth;
+        lastY = lastY + 4;
 
-            if (lastY > endX) {
-                lastX = startX;
-                lastY = lastY + stringHeight;
-            }
-        }
+        ctx.blit(RESIDENT_RESOURCE, startX, startY + 18, 0, 0, 12, 12, 12, 12);
+        ctx.drawString(client.font, String.valueOf(message.population()), startX + 14, startY + 18 + 4, 0xFFFFFF);
+        lastX = startX;
+        lastY = lastY + 18 + 4;
     }
 }
