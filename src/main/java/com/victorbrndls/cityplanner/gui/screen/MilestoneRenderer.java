@@ -1,4 +1,4 @@
-package com.victorbrndls.cityplanner.gui;
+package com.victorbrndls.cityplanner.gui.screen;
 
 import net.minecraft.client.gui.GuiGraphics;
 

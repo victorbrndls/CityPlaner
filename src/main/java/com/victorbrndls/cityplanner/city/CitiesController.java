@@ -94,6 +94,9 @@ public class CitiesController {
             if (city == null) continue;
 
             CityPlannerMod.CHANNEL.send(CityStatsMessage.create(city), PacketDistributor.PLAYER.with((ServerPlayer) player));
+
+            // TODO: improve this
+            CityPlannerMod.CHANNEL.send(city.getCurrentMilestone().getMessage(), PacketDistributor.PLAYER.with((ServerPlayer) player));
         }
     }
 

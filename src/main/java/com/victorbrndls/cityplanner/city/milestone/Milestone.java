@@ -7,6 +7,8 @@ public interface Milestone {
     }
 
     // 0.0 - 1.0
-    public double progress();
+    double progress();
+
+    Object getMessage();
 
 }

@@ -8,6 +8,7 @@ import com.victorbrndls.cityplanner.creative_tab.CityPlannerCreativeTabs;
 import com.victorbrndls.cityplanner.gui.CityStatsRenderer;
 import com.victorbrndls.cityplanner.item.CityPlannerItems;
 import com.victorbrndls.cityplanner.network.CityStatsMessage;
+import com.victorbrndls.cityplanner.network.Level1MilestoneMessage;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
@@ -58,6 +59,15 @@ public class CityPlannerMod {
                 .decoder(CityStatsMessage::decode)
                 .encoder(CityStatsMessage::encode)
                 .consumerMainThread(CityStatsMessage::handle)
+                .add();
+
+        CHANNEL.messageBuilder(
+                        Level1MilestoneMessage.class,
+                        NetworkDirection.PLAY_TO_CLIENT
+                )
+                .decoder(Level1MilestoneMessage::decode)
+                .encoder(Level1MilestoneMessage::encode)
+                .consumerMainThread(Level1MilestoneMessage::handle)
                 .add();
     }
 

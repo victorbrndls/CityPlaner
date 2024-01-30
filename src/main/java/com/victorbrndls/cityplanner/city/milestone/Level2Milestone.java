@@ -3,19 +3,20 @@ package com.victorbrndls.cityplanner.city.milestone;
 import com.victorbrndls.cityplanner.city.City;
 import com.victorbrndls.cityplanner.network.Level1MilestoneMessage;
 
-public class Level1Milestone implements Milestone {
+public class Level2Milestone implements Milestone {
 
-    public static int POPULATION_REQUIRED = 10;
+    public static int POPULATION_REQUIRED = 20;
+    public static int SATISFACTION_REQUIRED = 70;
 
     private final City city;
 
-    public Level1Milestone(City city) {
+    public Level2Milestone(City city) {
         this.city = city;
     }
 
     @Override
     public double progress() {
-        return city.getResidentCount() / 10.0;
+        return city.getResidentCount() / 20.0;
     }
 
     @Override
