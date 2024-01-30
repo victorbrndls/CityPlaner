@@ -2,11 +2,11 @@ package com.victorbrndls.cityplanner.city;
 
 import java.util.List;
 
-public class CityResourceManager {
+public class ResourceManager {
 
     private final List<Industry> industries;
 
-    public CityResourceManager(List<Industry> industries) {
+    public ResourceManager(List<Industry> industries) {
         this.industries = industries;
     }
 

@@ -72,7 +72,7 @@ public class CitiesController {
         double xDiff = Math.abs(city.getPosition().getX() - pos.getX());
         double zDiff = Math.abs(city.getPosition().getZ() - pos.getZ());
 
-        return xDiff < 10 && zDiff < 10;
+        return xDiff < 50 && zDiff < 50;
     }
 
     public void tick(Level level) {

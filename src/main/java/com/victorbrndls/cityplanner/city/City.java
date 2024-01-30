@@ -1,10 +1,12 @@
 package com.victorbrndls.cityplanner.city;
 
+import com.victorbrndls.cityplanner.city.milestone.MilestoneId;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.Level;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class City {
@@ -17,6 +19,8 @@ public class City {
     private final Runnable changed;
 
     private static final String PERSISTENT_DATA_KEY = "CityData";
+    private static final String MILESTONE_DATA_KEY = "milestone";
+
     private CompoundTag persistentData = new CompoundTag();
 
     // City related
@@ -24,7 +28,7 @@ public class City {
 
     private final List<Residence> residences = new ArrayList<>();
 
-    private final CityResourceManager resourceManager = new CityResourceManager(industries);
+    private final ResourceManager resourceManager = new ResourceManager(industries);
 
     private int currentTick = 0;
 
@@ -89,12 +93,27 @@ public class City {
         return residences.stream().mapToInt(Residence::getResidentCount).sum();
     }
 
+    public MilestoneId getCurrentMilestone() {
+        var value = persistentData.getString(MILESTONE_DATA_KEY);
+        return Arrays.stream(MilestoneId.values())
+                .filter(id -> id.id.equals(value))
+                .findFirst().orElse(MilestoneId.LEVEL_0);
+    }
+
+    public void setCurrentMilestone(MilestoneId id) {
+        persistentData.putString(MILESTONE_DATA_KEY, id.id);
+    }
+
     public void load(CompoundTag pTag) {
-        if (pTag.contains(PERSISTENT_DATA_KEY)) this.persistentData = pTag.getCompound(PERSISTENT_DATA_KEY);
+        if (pTag.contains(PERSISTENT_DATA_KEY)) {
+            this.persistentData = pTag.getCompound(PERSISTENT_DATA_KEY);
+        }
     }
 
     public void save(CompoundTag pTag) {
-        if (this.persistentData != null) pTag.put(PERSISTENT_DATA_KEY, this.persistentData.copy());
+        if (this.persistentData != null) {
+            pTag.put(PERSISTENT_DATA_KEY, this.persistentData.copy());
+        }
     }
 
 }
