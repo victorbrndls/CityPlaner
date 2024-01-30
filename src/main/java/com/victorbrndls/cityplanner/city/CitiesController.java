@@ -16,6 +16,8 @@ import java.util.function.Consumer;
 
 public class CitiesController {
 
+    public static final int CITY_SIZE = 50;
+
     private int currentTick = 0;
 
     private final Set<City> cities = new HashSet<>();
@@ -72,7 +74,7 @@ public class CitiesController {
         double xDiff = Math.abs(city.getPosition().getX() - pos.getX());
         double zDiff = Math.abs(city.getPosition().getZ() - pos.getZ());
 
-        return xDiff < 50 && zDiff < 50;
+        return xDiff < CITY_SIZE && zDiff < CITY_SIZE;
     }
 
     public void tick(Level level) {

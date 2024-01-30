@@ -4,8 +4,10 @@ import com.victorbrndls.cityplanner.city.milestone.Level1Milestone;
 import com.victorbrndls.cityplanner.city.milestone.Level2Milestone;
 import com.victorbrndls.cityplanner.city.milestone.Milestone;
 import com.victorbrndls.cityplanner.city.milestone.MilestoneId;
+import com.victorbrndls.cityplanner.helper.BlockPosHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.Level;
 
 import java.util.ArrayList;
@@ -127,6 +129,7 @@ public class City {
 
         setCurrentMilestone(nextMilestoneId);
         updateMilestoneFromId();
+        displayMessage("City advanced to new milestone");
     }
 
     private void updateMilestoneFromId() {
@@ -136,6 +139,12 @@ public class City {
         } else if (milestoneId == MilestoneId.LEVEL_2) {
             currentMilestone = new Level2Milestone(this);
         }
+    }
+
+    private void displayMessage(String message) {
+        level.players().stream()
+                .filter(player -> BlockPosHelper.isInHorizontalDistance(position, player.blockPosition(), CitiesController.CITY_SIZE))
+                .forEach(player -> player.displayClientMessage(Component.literal(message), false));
     }
 
     public void load(CompoundTag pTag) {
