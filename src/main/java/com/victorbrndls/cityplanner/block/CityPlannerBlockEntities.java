@@ -5,6 +5,7 @@ import com.victorbrndls.cityplanner.block.foundation.CityFoundationBlockEntity;
 import com.victorbrndls.cityplanner.block.housing.ResidenceLevel1BlockEntity;
 import com.victorbrndls.cityplanner.block.industry.LumberMillBlockEntity;
 import com.victorbrndls.cityplanner.block.industry.VegetableFarmBlockEntity;
+import com.victorbrndls.cityplanner.block.industry.WaterWellBlockEntity;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -28,6 +29,8 @@ public class CityPlannerBlockEntities {
             register("lumber_mill", LumberMillBlockEntity::new, CityPlannerBlocks.LUMBER_MILL_BLOCK);
     public static final RegistryObject<BlockEntityType<VegetableFarmBlockEntity>> VEGETABLE_FARM_BLOCK_ENTITY =
             register("vegetable_farm", VegetableFarmBlockEntity::new, CityPlannerBlocks.VEGETABLE_FARM_BLOCK);
+    public static final RegistryObject<BlockEntityType<WaterWellBlockEntity>> WATER_WELL_BLOCK_ENTITY =
+            register("water_well", WaterWellBlockEntity::new, CityPlannerBlocks.WATER_WELL_BLOCK);
 
     // Housing
     public static final RegistryObject<BlockEntityType<ResidenceLevel1BlockEntity>> RESIDENCE_LEVEL_1_BLOCK_ENTITY =

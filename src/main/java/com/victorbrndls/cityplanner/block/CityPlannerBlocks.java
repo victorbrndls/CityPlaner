@@ -5,6 +5,7 @@ import com.victorbrndls.cityplanner.block.foundation.CityFoundationBlock;
 import com.victorbrndls.cityplanner.block.housing.ResidenceLevel1Block;
 import com.victorbrndls.cityplanner.block.industry.LumberMillBlock;
 import com.victorbrndls.cityplanner.block.industry.VegetableFarmBlock;
+import com.victorbrndls.cityplanner.block.industry.WaterWellBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -26,6 +27,9 @@ public class CityPlannerBlocks {
     );
     public static final RegistryObject<Block> VEGETABLE_FARM_BLOCK = BLOCKS.register("vegetable_farm",
             VegetableFarmBlock::new
+    );
+    public static final RegistryObject<Block> WATER_WELL_BLOCK = BLOCKS.register("water_well",
+            WaterWellBlock::new
     );
 
     // Housing

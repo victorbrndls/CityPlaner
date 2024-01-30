@@ -2,10 +2,10 @@
   "item.cityplanner.city_foundation": "City Foundation",
   "item.cityplanner.lumber_mill": "Lumber Mill",
   "item.cityplanner.residence_level_1": "House I",
-  "item.cityplanner.city_inspector": "City Inspector",
 
   "block.cityplanner.city_foundation": "City Foundation",
   "block.cityplanner.lumber_mill": "Lumber Mill",
   "block.cityplanner.vegetable_farm": "Vegetable Farm",
+  "block.cityplanner.water_well": "Water Well",
   "block.cityplanner.residence_level_1": "House I"
 }

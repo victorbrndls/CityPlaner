@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "cityplanner:block/water_well"
+    }
+  }
+}
