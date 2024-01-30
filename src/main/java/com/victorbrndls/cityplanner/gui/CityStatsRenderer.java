@@ -9,6 +9,8 @@ public class CityStatsRenderer {
 
     private static final ResourceLocation PLANK_RESOURCE =
             new ResourceLocation("cityplanner", "textures/gui/resource_plank.png");
+    private static final ResourceLocation WATER_RESOURCE =
+            new ResourceLocation("cityplanner", "textures/gui/resource_water.png");
     private static final ResourceLocation VEGETABLE_RESOURCE =
             new ResourceLocation("cityplanner", "textures/gui/resource_vegetable.png");
     private static final ResourceLocation RESIDENT_RESOURCE =
@@ -33,14 +35,16 @@ public class CityStatsRenderer {
         var stringWidth = client.font.width("0000"); // up to 4 numbers
 
         ctx.blit(PLANK_RESOURCE, lastX, startY, 0, 0, 12, 12, 12, 12);
-        ctx.drawString(client.font, String.valueOf(message.plankAmount()), lastX + 14, startY + 4, 0xFFFFFF);
+        ctx.drawString(client.font, String.valueOf(message.plankAmount()), lastX + 14, lastY + 4, 0xFFFFFF);
         lastX = lastX + 14 + stringWidth;
-        lastY = lastY + 4;
 
         ctx.blit(VEGETABLE_RESOURCE, lastX, startY, 0, 0, 12, 12, 12, 12);
-        ctx.drawString(client.font, String.valueOf(message.vegetableAmount()), lastX + 12, lastY, 0xFFFFFF);
+        ctx.drawString(client.font, String.valueOf(message.vegetableAmount()), lastX + 12, lastY + 4, 0xFFFFFF);
         lastX = lastX + 12 + stringWidth;
-        lastY = lastY + 4;
+
+        ctx.blit(WATER_RESOURCE, lastX, startY, 0, 0, 12, 12, 12, 12);
+        ctx.drawString(client.font, String.valueOf(message.waterAmount()), lastX + 12, lastY + 4, 0xFFFFFF);
+        lastX = lastX + 12 + stringWidth;
 
         ctx.blit(RESIDENT_RESOURCE, startX, startY + 18, 0, 0, 12, 12, 12, 12);
         ctx.drawString(client.font, String.valueOf(message.population()), startX + 14, startY + 18 + 4, 0xFFFFFF);

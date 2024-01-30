@@ -8,6 +8,7 @@ import net.minecraftforge.event.network.CustomPayloadEvent;
 
 public record CityStatsMessage(
         long plankAmount,
+        long waterAmount,
         long vegetableAmount,
         long population
 ) {
@@ -15,6 +16,7 @@ public record CityStatsMessage(
     public static CityStatsMessage create(City city) {
         return new CityStatsMessage(
                 city.getResourceCount(Resource.PLANK),
+                city.getResourceCount(Resource.WATER),
                 city.getResourceCount(Resource.VEGETABLE),
                 city.getResidentCount()
         );
@@ -24,12 +26,14 @@ public record CityStatsMessage(
         return new CityStatsMessage(
                 buf.readLong(),
                 buf.readLong(),
+                buf.readLong(),
                 buf.readLong()
         );
     }
 
     public void encode(FriendlyByteBuf output) {
         output.writeLong(plankAmount);
+        output.writeLong(waterAmount);
         output.writeLong(vegetableAmount);
         output.writeLong(population);
     }
