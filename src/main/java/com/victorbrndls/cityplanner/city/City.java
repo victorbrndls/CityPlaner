@@ -117,13 +117,16 @@ public class City {
 
     private void checkMilestone() {
         var isComplete = currentMilestone.isCompleted();
+        if (!isComplete) return;
 
-        if (isComplete) {
-            var nextMilestoneId = MilestoneId.values()[getCurrentMilestoneId().ordinal() + 1];
+        MilestoneId currentMilestoneId = getCurrentMilestoneId();
+        var isLastMilestone = MilestoneId.values()[MilestoneId.values().length - 1] == currentMilestoneId;
+        if (isLastMilestone) return;
 
-            setCurrentMilestone(nextMilestoneId);
-            updateMilestoneFromId();
-        }
+        var nextMilestoneId = MilestoneId.values()[currentMilestoneId.ordinal() + 1];
+
+        setCurrentMilestone(nextMilestoneId);
+        updateMilestoneFromId();
     }
 
     private void updateMilestoneFromId() {

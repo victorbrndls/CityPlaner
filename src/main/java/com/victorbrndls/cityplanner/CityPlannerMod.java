@@ -7,8 +7,7 @@ import com.victorbrndls.cityplanner.city.CitiesController;
 import com.victorbrndls.cityplanner.creative_tab.CityPlannerCreativeTabs;
 import com.victorbrndls.cityplanner.gui.CityStatsRenderer;
 import com.victorbrndls.cityplanner.item.CityPlannerItems;
-import com.victorbrndls.cityplanner.network.CityStatsMessage;
-import com.victorbrndls.cityplanner.network.Level1MilestoneMessage;
+import com.victorbrndls.cityplanner.network.CityPlannerNetwork;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
@@ -24,7 +23,6 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.network.ChannelBuilder;
-import net.minecraftforge.network.NetworkDirection;
 import net.minecraftforge.network.SimpleChannel;
 import org.slf4j.Logger;
 
@@ -52,23 +50,7 @@ public class CityPlannerMod {
         // Register our mod's ForgeConfigSpec so that Forge can create and load the config file for us
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.SPEC);
 
-        CHANNEL.messageBuilder(
-                        CityStatsMessage.class,
-                        NetworkDirection.PLAY_TO_CLIENT
-                )
-                .decoder(CityStatsMessage::decode)
-                .encoder(CityStatsMessage::encode)
-                .consumerMainThread(CityStatsMessage::handle)
-                .add();
-
-        CHANNEL.messageBuilder(
-                        Level1MilestoneMessage.class,
-                        NetworkDirection.PLAY_TO_CLIENT
-                )
-                .decoder(Level1MilestoneMessage::decode)
-                .encoder(Level1MilestoneMessage::encode)
-                .consumerMainThread(Level1MilestoneMessage::handle)
-                .add();
+        CityPlannerNetwork.register();
     }
 
     @SubscribeEvent
