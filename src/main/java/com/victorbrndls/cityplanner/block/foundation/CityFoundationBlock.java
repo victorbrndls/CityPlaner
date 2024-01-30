@@ -1,7 +1,6 @@
 package com.victorbrndls.cityplanner.block.foundation;
 
-import com.victorbrndls.cityplanner.gui.screen.CityFoundationScreen;
-import net.minecraft.client.Minecraft;
+import com.victorbrndls.cityplanner.CityPlannerMod;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -41,7 +40,7 @@ public class CityFoundationBlock extends Block implements EntityBlock {
 
         if (blockentity instanceof CityFoundationBlockEntity) {
             if (pLevel.isClientSide) {
-                Minecraft.getInstance().setScreen(new CityFoundationScreen());
+                CityPlannerMod.proxy.openCityFoundationScreen();
             }
             return InteractionResult.sidedSuccess(pLevel.isClientSide);
         } else {
