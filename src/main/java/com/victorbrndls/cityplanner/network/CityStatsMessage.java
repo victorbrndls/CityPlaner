@@ -10,7 +10,8 @@ public record CityStatsMessage(
         long plankAmount,
         long waterAmount,
         long vegetableAmount,
-        long population
+        long population,
+        int satisfaction
 ) {
 
     public static CityStatsMessage create(City city) {
@@ -18,7 +19,8 @@ public record CityStatsMessage(
                 city.getResourceCount(Resource.PLANK),
                 city.getResourceCount(Resource.WATER),
                 city.getResourceCount(Resource.VEGETABLE),
-                city.getResidentCount()
+                city.getResidentCount(),
+                0
         );
     }
 
@@ -27,7 +29,8 @@ public record CityStatsMessage(
                 buf.readLong(),
                 buf.readLong(),
                 buf.readLong(),
-                buf.readLong()
+                buf.readLong(),
+                buf.readInt()
         );
     }
 
@@ -36,6 +39,7 @@ public record CityStatsMessage(
         output.writeLong(waterAmount);
         output.writeLong(vegetableAmount);
         output.writeLong(population);
+        output.writeInt(satisfaction);
     }
 
     public void handle(CustomPayloadEvent.Context context) {

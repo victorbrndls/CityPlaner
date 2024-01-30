@@ -40,5 +40,8 @@ public class CityStatsRenderer {
         ctx.drawString(client.font, String.valueOf(message.population()), startX + 14, startY + 18 + 4, 0xFFFFFF);
         lastX = startX;
         lastY = lastY + 18 + 4;
+
+        ctx.blit(CityPlannerGuiResources.RESIDENT_SATISFACTION, startX + 14 + stringWidth, startY + 18, 0, 0, 12, 12, 12, 12);
+        ctx.drawString(client.font, String.valueOf(message.satisfaction()), startX + 14 + 12 + stringWidth, startY + 18 + 4, 0xFFFFFF);
     }
 }

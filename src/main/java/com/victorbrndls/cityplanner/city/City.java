@@ -112,8 +112,7 @@ public class City {
     }
 
     public Milestone getCurrentMilestone() {
-        return new Level2Milestone(this);
-//        return currentMilestone;
+        return currentMilestone;
     }
 
     private void checkMilestone() {
