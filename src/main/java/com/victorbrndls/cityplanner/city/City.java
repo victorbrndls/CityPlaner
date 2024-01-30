@@ -1,5 +1,6 @@
 package com.victorbrndls.cityplanner.city;
 
+import com.victorbrndls.cityplanner.city.housing.Residence;
 import com.victorbrndls.cityplanner.city.milestone.Level1Milestone;
 import com.victorbrndls.cityplanner.city.milestone.Level2Milestone;
 import com.victorbrndls.cityplanner.city.milestone.Milestone;

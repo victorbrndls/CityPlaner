@@ -1,4 +1,4 @@
-package com.victorbrndls.cityplanner.city;
+package com.victorbrndls.cityplanner.city.housing;
 
 public interface Residence {
 

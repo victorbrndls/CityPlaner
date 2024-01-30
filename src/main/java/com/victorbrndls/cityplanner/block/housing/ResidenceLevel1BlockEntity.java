@@ -3,14 +3,18 @@ package com.victorbrndls.cityplanner.block.housing;
 import com.victorbrndls.cityplanner.CityPlannerMod;
 import com.victorbrndls.cityplanner.block.CityPlannerBlockEntities;
 import com.victorbrndls.cityplanner.city.City;
-import com.victorbrndls.cityplanner.city.Residence;
 import com.victorbrndls.cityplanner.city.Resource;
+import com.victorbrndls.cityplanner.city.housing.Residence;
+import com.victorbrndls.cityplanner.city.housing.Resident;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class ResidenceLevel1BlockEntity extends BlockEntity implements Residence {
@@ -19,7 +23,7 @@ public class ResidenceLevel1BlockEntity extends BlockEntity implements Residence
 
     private City city;
 
-    private int residents = 0;
+    private List<Resident> residents = new ArrayList<>();
     private static final int maxResidents = 4;
 
     private int currentTick = 0;
@@ -35,37 +39,49 @@ public class ResidenceLevel1BlockEntity extends BlockEntity implements Residence
         if (currentTick == 40) {
             currentTick = 0;
 
-            eatOrDie();
+            tryEating();
+
+            removeDeadResidents();
             spawnNewResident();
         }
     }
 
     @Override
     public int getResidentCount() {
-        return residents;
+        return residents.size();
     }
 
-    private void eatOrDie() {
-        for (int i = 0; i < residents; i++) {
-            var ate = city.tryConsume(Resource.VEGETABLE, 1);
-            if (!ate) killResident();
+    private void tryEating() {
+        for (var resident : residents) {
+            var hasFood = city.tryConsume(Resource.VEGETABLE, 1);
+
+            if (hasFood) {
+                resident.onFoodAvailable();
+            } else {
+                resident.onNoFood();
+            }
         }
     }
 
+    private void removeDeadResidents() {
+        var dead = residents.stream().filter(resident -> !resident.isAlive()).toList();
+        dead.forEach(this::onResidentDied);
+    }
+
     private void spawnNewResident() {
-        if (residents < maxResidents) {
+        if (residents.size() < maxResidents) {
             if (random.nextInt(0, 15) == 0) {
                 // At least 10 vegetables required
                 if (city.tryConsume(Resource.VEGETABLE, 10)) {
-                    residents++;
+                    residents.add(new Resident());
                     setChanged();
                 }
             }
         }
     }
 
-    private void killResident() {
-        residents--;
+    private void onResidentDied(Resident resident) {
+        residents.remove(resident);
         setChanged();
     }
 
@@ -97,13 +113,27 @@ public class ResidenceLevel1BlockEntity extends BlockEntity implements Residence
     public void load(CompoundTag pTag) {
         super.load(pTag);
         currentTick = pTag.getInt("currentTick");
-        residents = pTag.getInt("residents");
+
+        ListTag residentsTag = (ListTag) pTag.get("residents");
+        residentsTag.forEach(residentTag -> {
+            Resident resident = new Resident();
+            resident.load((CompoundTag) residentTag);
+            residents.add(resident);
+        });
     }
 
     @Override
     protected void saveAdditional(CompoundTag pTag) {
         super.saveAdditional(pTag);
         pTag.putInt("currentTick", currentTick);
-        pTag.putInt("residents", residents);
+
+        ListTag residentsTag = new ListTag();
+        residents.forEach(resident -> {
+            CompoundTag residentTag = new CompoundTag();
+            resident.save(residentTag);
+            residentsTag.add(residentTag);
+        });
+
+        pTag.put("residents", residentsTag);
     }
 }
