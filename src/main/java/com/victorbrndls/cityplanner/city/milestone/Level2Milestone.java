@@ -1,7 +1,7 @@
 package com.victorbrndls.cityplanner.city.milestone;
 
 import com.victorbrndls.cityplanner.city.City;
-import com.victorbrndls.cityplanner.network.Level1MilestoneMessage;
+import com.victorbrndls.cityplanner.network.Level2MilestoneMessage;
 
 public class Level2Milestone implements Milestone {
 
@@ -21,6 +21,6 @@ public class Level2Milestone implements Milestone {
 
     @Override
     public Object getMessage() {
-        return Level1MilestoneMessage.create(city);
+        return Level2MilestoneMessage.create(city);
     }
 }

@@ -10,7 +10,10 @@ public class CityPlannerGuiResources {
             new ResourceLocation("cityplanner", "textures/gui/resource_water.png");
     public static final ResourceLocation VEGETABLE_RESOURCE =
             new ResourceLocation("cityplanner", "textures/gui/resource_vegetable.png");
+
     public static final ResourceLocation RESIDENT_RESOURCE =
             new ResourceLocation("cityplanner", "textures/gui/resource_resident.png");
+    public static final ResourceLocation RESIDENT_SATISFACTION =
+            new ResourceLocation("cityplanner", "textures/gui/resident_satisfaction.png");
 
 }

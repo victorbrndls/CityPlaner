@@ -21,6 +21,12 @@ public class CityPlannerNetwork {
                 .consumerMainThread(Level1MilestoneMessage::handle)
                 .add();
 
+        CHANNEL.messageBuilder(Level2MilestoneMessage.class, NetworkDirection.PLAY_TO_CLIENT)
+                .decoder(Level2MilestoneMessage::decode)
+                .encoder(Level2MilestoneMessage::encode)
+                .consumerMainThread(Level2MilestoneMessage::handle)
+                .add();
+
         CHANNEL.messageBuilder(Level9999MilestoneMessage.class, NetworkDirection.PLAY_TO_CLIENT)
                 .decoder(Level9999MilestoneMessage::decode)
                 .encoder(Level9999MilestoneMessage::encode)
