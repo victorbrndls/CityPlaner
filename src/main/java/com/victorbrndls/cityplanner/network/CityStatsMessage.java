@@ -20,7 +20,7 @@ public record CityStatsMessage(
                 city.getResourceCount(Resource.WATER),
                 city.getResourceCount(Resource.VEGETABLE),
                 city.getResidentCount(),
-                0
+                city.getSatisfaction()
         );
     }
 

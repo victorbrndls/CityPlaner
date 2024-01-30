@@ -103,6 +103,17 @@ public class City {
         return residences.stream().mapToInt(Residence::getResidentCount).sum();
     }
 
+    public int getSatisfaction() {
+        if (residences.isEmpty()) return 0;
+        var totalSatisfaction = 0;
+
+        for (var resident : residences) {
+            totalSatisfaction += resident.satisfaction();
+        }
+
+        return totalSatisfaction / residences.size();
+    }
+
     private MilestoneId getCurrentMilestoneId() {
         var value = persistentData.getString(MILESTONE_DATA_KEY);
         return Arrays.stream(MilestoneId.values())

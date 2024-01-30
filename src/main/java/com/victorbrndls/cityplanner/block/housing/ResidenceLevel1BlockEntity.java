@@ -51,16 +51,31 @@ public class ResidenceLevel1BlockEntity extends BlockEntity implements Residence
         return residents.size();
     }
 
+    @Override
+    public int satisfaction() {
+        if (residents.isEmpty()) return 0;
+
+        var totalSatisfaction = 0;
+
+        for (var resident : residents) {
+            totalSatisfaction += resident.satisfaction();
+        }
+
+        return totalSatisfaction / residents.size();
+    }
+
     private void tryEating() {
         for (var resident : residents) {
             var hasFood = city.tryConsume(Resource.VEGETABLE, 1);
 
             if (hasFood) {
-                resident.onFoodAvailable();
+                resident.onResourceAvailable(Resource.VEGETABLE);
             } else {
-                resident.onNoFood();
+                resident.onResourceMissing(Resource.VEGETABLE);
             }
         }
+
+        setChanged();
     }
 
     private void removeDeadResidents() {

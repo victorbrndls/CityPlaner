@@ -5,4 +5,6 @@ public interface Residence {
     public void tick();
 
     int getResidentCount();
+
+    int satisfaction();
 }

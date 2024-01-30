@@ -20,7 +20,7 @@ public record Level2MilestoneMessage(
                 Level2Milestone.POPULATION_REQUIRED,
                 city.getResidentCount(),
                 Level2Milestone.SATISFACTION_REQUIRED,
-                0,
+                city.getSatisfaction(),
                 city.getCurrentMilestone().progress()
         );
     }
