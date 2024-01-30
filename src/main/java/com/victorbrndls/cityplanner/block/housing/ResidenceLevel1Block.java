@@ -1,9 +1,10 @@
 package com.victorbrndls.cityplanner.block.housing;
 
 import com.victorbrndls.cityplanner.CityPlannerMod;
-import com.victorbrndls.cityplanner.helper.BlockPosHelper;
+import com.victorbrndls.cityplanner.city.City;
+import com.victorbrndls.cityplanner.city.Resource;
+import com.victorbrndls.cityplanner.helper.CityHelper;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -27,13 +28,20 @@ public class ResidenceLevel1Block extends Block implements EntityBlock {
         super.onPlace(pState, pLevel, pPos, pOldState, pMovedByPiston);
 
         if (pLevel.isClientSide) return;
-        if (CityPlannerMod.citiesController.hasCityInRange(pPos)) return;
+
+        City city = CityPlannerMod.citiesController.getCityInRange(pPos);
+        if (city != null) {
+            var hasResources = city.tryConsume(Resource.PLANK, 10);
+            if (hasResources) {
+                return;
+            } else {
+                CityHelper.displayMessageToNearbyPlayers(pLevel, pPos, "You need 10 planks to build a residence");
+            }
+        } else {
+            CityHelper.displayMessageToNearbyPlayers(pLevel, pPos, "No city in range");
+        }
 
         pLevel.destroyBlock(pPos, true);
-
-        pLevel.players().stream()
-                .filter(player -> BlockPosHelper.isInHorizontalDistance(pPos, player.blockPosition(), 10))
-                .forEach(player -> player.displayClientMessage(Component.literal("No city in range"), true));
     }
 
     @Nullable
