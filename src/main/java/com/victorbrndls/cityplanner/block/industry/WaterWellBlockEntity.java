@@ -31,7 +31,7 @@ public class WaterWellBlockEntity extends BlockEntity implements Industry {
         if (currentTick == 20) {
             currentTick = 0;
 
-            if (waterAmount < maxStorage - 8) {
+            if (waterAmount <= maxStorage - 8) {
                 waterAmount += 8;
                 setChanged();
             }

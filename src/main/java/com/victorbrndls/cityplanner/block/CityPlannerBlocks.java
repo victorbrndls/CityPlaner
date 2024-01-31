@@ -6,6 +6,7 @@ import com.victorbrndls.cityplanner.block.housing.ResidenceLevel1Block;
 import com.victorbrndls.cityplanner.block.industry.LumberMillBlock;
 import com.victorbrndls.cityplanner.block.industry.VegetableFarmBlock;
 import com.victorbrndls.cityplanner.block.industry.WaterWellBlock;
+import com.victorbrndls.cityplanner.block.industry.WindTurbineBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -30,6 +31,11 @@ public class CityPlannerBlocks {
     );
     public static final RegistryObject<Block> WATER_WELL_BLOCK = BLOCKS.register("water_well",
             WaterWellBlock::new
+    );
+
+    // Industry - Energy
+    public static final RegistryObject<Block> WIND_TURBINE_BLOCK = BLOCKS.register("wind_turbine",
+            WindTurbineBlock::new
     );
 
     // Housing
