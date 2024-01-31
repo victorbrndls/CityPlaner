@@ -16,7 +16,7 @@ import org.jetbrains.annotations.Nullable;
 public class VegetableFarmBlock extends Block implements EntityBlock {
 
     public VegetableFarmBlock() {
-        super(Blocks.IRON_BLOCK.properties()
+        super(Blocks.SPRUCE_WOOD.properties()
                 .pushReaction(PushReaction.BLOCK)
         );
     }

@@ -1,0 +1,11 @@
+{
+  "values": [
+    "cityplanner:city_foundation",
+    "cityplanner:lumber_mill",
+    "cityplanner:vegetable_farm",
+    "cityplanner:water_well",
+    "cityplanner:furniture_factory",
+    "cityplanner:wind_turbine",
+    "cityplanner:residence_level_1"
+  ]
+}

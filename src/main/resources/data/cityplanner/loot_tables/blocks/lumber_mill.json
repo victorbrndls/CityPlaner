@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "cityplanner:city_foundation"
+          "name": "cityplanner:lumber_mill"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "cityplanner:blocks/city_foundation"
+  "random_sequence": "cityplanner:blocks/lumber_mill"
 }

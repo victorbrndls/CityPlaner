@@ -16,7 +16,7 @@ import org.jetbrains.annotations.Nullable;
 public class LumberMillBlock extends Block implements EntityBlock {
 
     public LumberMillBlock() {
-        super(Blocks.IRON_BLOCK.properties()
+        super(Blocks.SPRUCE_WOOD.properties()
                 .pushReaction(PushReaction.BLOCK)
         );
     }
