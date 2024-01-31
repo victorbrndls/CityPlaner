@@ -32,7 +32,8 @@ public class FurnitureFactoryBlockEntity extends BlockEntity implements Industry
             currentTick = 0;
 
             if (furnitureAmount <= maxStorage - 1) {
-                if (city.tryConsume(Resource.ENERGY, 1)) {
+                // TODO: consume both at the same time
+                if (city.tryConsume(Resource.ENERGY, 1) && city.tryConsume(Resource.PLANK, 1)) {
                     furnitureAmount += 1;
                     setChanged();
                 }
