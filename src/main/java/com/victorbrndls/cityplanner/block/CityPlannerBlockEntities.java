@@ -3,10 +3,7 @@ package com.victorbrndls.cityplanner.block;
 import com.victorbrndls.cityplanner.CityPlannerMod;
 import com.victorbrndls.cityplanner.block.foundation.CityFoundationBlockEntity;
 import com.victorbrndls.cityplanner.block.housing.ResidenceLevel1BlockEntity;
-import com.victorbrndls.cityplanner.block.industry.LumberMillBlockEntity;
-import com.victorbrndls.cityplanner.block.industry.VegetableFarmBlockEntity;
-import com.victorbrndls.cityplanner.block.industry.WaterWellBlockEntity;
-import com.victorbrndls.cityplanner.block.industry.WindTurbineBlockEntity;
+import com.victorbrndls.cityplanner.block.industry.*;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -32,6 +29,8 @@ public class CityPlannerBlockEntities {
             register("vegetable_farm", VegetableFarmBlockEntity::new, CityPlannerBlocks.VEGETABLE_FARM_BLOCK);
     public static final RegistryObject<BlockEntityType<WaterWellBlockEntity>> WATER_WELL_BLOCK_ENTITY =
             register("water_well", WaterWellBlockEntity::new, CityPlannerBlocks.WATER_WELL_BLOCK);
+    public static final RegistryObject<BlockEntityType<FurnitureFactoryBlockEntity>> FURNITURE_FACTORY_BLOCK_ENTITY =
+            register("furniture_factory", FurnitureFactoryBlockEntity::new, CityPlannerBlocks.FURNITURE_FACTORY_BLOCK);
 
     // Industry - Energy
     public static final RegistryObject<BlockEntityType<WindTurbineBlockEntity>> WIND_TURBINE_BLOCK_ENTITY =

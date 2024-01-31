@@ -28,6 +28,9 @@ public class CityPlannerItems {
     public static final RegistryObject<Item> WATER_WELL_ITEM = ITEMS.register("water_well", () ->
             new BlockItem(CityPlannerBlocks.WATER_WELL_BLOCK.get(), new Item.Properties())
     );
+    public static final RegistryObject<Item> FURNITURE_FACTORY_ITEM = ITEMS.register("furniture_factory", () ->
+            new BlockItem(CityPlannerBlocks.FURNITURE_FACTORY_BLOCK.get(), new Item.Properties())
+    );
 
     // Industry - Energy
     public static final RegistryObject<Item> WIND_TURBINE_ITEM = ITEMS.register("wind_turbine", () ->
