@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "cityplanner:block/wind_turbine"
+    }
+  }
+}

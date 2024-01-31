@@ -39,6 +39,6 @@ public class WindTurbineBlock extends Block implements EntityBlock {
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return new WaterWellBlockEntity(pPos, pState);
+        return new WindTurbineBlockEntity(pPos, pState);
     }
 }

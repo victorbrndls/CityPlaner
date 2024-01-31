@@ -37,7 +37,6 @@ public class CityPlannerItems {
             new BlockItem(CityPlannerBlocks.WIND_TURBINE_BLOCK.get(), new Item.Properties())
     );
 
-
     // Housing
     public static final RegistryObject<Item> RESIDENCE_LEVEL_1 = ITEMS.register("residence_level_1", () ->
             new BlockItem(CityPlannerBlocks.RESIDENCE_LEVEL_1_BLOCK.get(), new Item.Properties().stacksTo(1))

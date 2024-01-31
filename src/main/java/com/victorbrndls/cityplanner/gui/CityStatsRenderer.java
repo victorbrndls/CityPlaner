@@ -3,6 +3,9 @@ package com.victorbrndls.cityplanner.gui;
 import com.victorbrndls.cityplanner.network.CityStatsMessage;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.resources.ResourceLocation;
+
+import java.util.List;
 
 public class CityStatsRenderer {
 
@@ -24,24 +27,41 @@ public class CityStatsRenderer {
 
         var stringWidth = client.font.width("0000"); // up to 4 numbers
 
-        ctx.blit(CityPlannerGuiResources.PLANK_RESOURCE, lastX, startY, 0, 0, 12, 12, 12, 12);
-        ctx.drawString(client.font, String.valueOf(message.plankAmount()), lastX + 14, lastY + 4, 0xFFFFFF);
-        lastX = lastX + 14 + stringWidth;
+        var topStats = getFirstBoxStats();
+        var bottomStats = getSecondBoxStats();
 
-        ctx.blit(CityPlannerGuiResources.VEGETABLE_RESOURCE, lastX, startY, 0, 0, 12, 12, 12, 12);
-        ctx.drawString(client.font, String.valueOf(message.vegetableAmount()), lastX + 12, lastY + 4, 0xFFFFFF);
-        lastX = lastX + 12 + stringWidth;
+        for (var stat : topStats) {
+            ctx.blit(stat.resource(), lastX, lastY, 0, 0, 12, 12, 12, 12);
+            ctx.drawString(client.font, stat.text(), lastX + 14, lastY + 4, 0xFFFFFF);
+            lastX = lastX + 12 + stringWidth;
+        }
 
-        ctx.blit(CityPlannerGuiResources.WATER_RESOURCE, lastX, startY, 0, 0, 12, 12, 12, 12);
-        ctx.drawString(client.font, String.valueOf(message.waterAmount()), lastX + 12, lastY + 4, 0xFFFFFF);
-        lastX = lastX + 12 + stringWidth;
-
-        ctx.blit(CityPlannerGuiResources.RESIDENT_RESOURCE, startX, startY + 18, 0, 0, 12, 12, 12, 12);
-        ctx.drawString(client.font, String.valueOf(message.population()), startX + 14, startY + 18 + 4, 0xFFFFFF);
         lastX = startX;
-        lastY = lastY + 18 + 4;
+        lastY = startY + 18;
+        for (var stat : bottomStats) {
+            ctx.blit(stat.resource(), lastX, lastY, 0, 0, 12, 12, 12, 12);
+            ctx.drawString(client.font, stat.text(), lastX + 14, lastY + 4, 0xFFFFFF);
+            lastX = lastX + 12 + stringWidth;
+        }
+    }
 
-        ctx.blit(CityPlannerGuiResources.RESIDENT_SATISFACTION, startX + 14 + stringWidth, startY + 18, 0, 0, 12, 12, 12, 12);
-        ctx.drawString(client.font, message.satisfaction() + "%", startX + 14 + 12 + stringWidth, startY + 18 + 4, 0xFFFFFF);
+    private static List<Stat> getFirstBoxStats() {
+        return List.of(
+                new Stat(CityPlannerGuiResources.WATER_RESOURCE, String.valueOf(message.waterAmount())),
+                new Stat(CityPlannerGuiResources.ENERGY_RESOURCE, String.valueOf(message.energyAmount())),
+                new Stat(CityPlannerGuiResources.PLANK_RESOURCE, String.valueOf(message.plankAmount())),
+                new Stat(CityPlannerGuiResources.VEGETABLE_RESOURCE, String.valueOf(message.vegetableAmount())),
+                new Stat(CityPlannerGuiResources.FURNITURE_RESOURCE, String.valueOf(message.furnitureAmount()))
+        );
+    }
+
+    private static List<Stat> getSecondBoxStats() {
+        return List.of(
+                new Stat(CityPlannerGuiResources.RESIDENT_RESOURCE, String.valueOf(message.population())),
+                new Stat(CityPlannerGuiResources.RESIDENT_SATISFACTION, message.satisfaction() + "%")
+        );
+    }
+
+    private record Stat(ResourceLocation resource, String text) {
     }
 }
