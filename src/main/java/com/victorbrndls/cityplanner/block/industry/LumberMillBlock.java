@@ -1,9 +1,8 @@
 package com.victorbrndls.cityplanner.block.industry;
 
 import com.victorbrndls.cityplanner.CityPlannerMod;
-import com.victorbrndls.cityplanner.helper.BlockPosHelper;
+import com.victorbrndls.cityplanner.helper.CityHelper;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
@@ -35,23 +34,13 @@ public class LumberMillBlock extends Block implements EntityBlock {
         super.setPlacedBy(pLevel, pPos, pState, pPlacer, pStack);
 
         if (pLevel.isClientSide) return;
-
-        placeStructure(pLevel, pPos, pPlacer);
-    }
-
-    @Override
-    @SuppressWarnings("deprecation")
-    public void onPlace(BlockState pState, Level pLevel, BlockPos pPos, BlockState pOldState, boolean pMovedByPiston) {
-        super.onPlace(pState, pLevel, pPos, pOldState, pMovedByPiston);
-
-        if (pLevel.isClientSide) return;
-        if (CityPlannerMod.citiesController.hasCityInRange(pPos)) return;
+        if (CityPlannerMod.citiesController.hasCityInRange(pPos)) {
+            placeStructure(pLevel, pPos, pPlacer);
+            return;
+        }
 
         pLevel.destroyBlock(pPos, true);
-
-        pLevel.players().stream()
-                .filter(player -> BlockPosHelper.isInHorizontalDistance(pPos, player.blockPosition(), 10))
-                .forEach(player -> player.displayClientMessage(Component.literal("No city in range"), true));
+        CityHelper.displayMessageToNearbyPlayers(pLevel, pPos, "No city in range");
     }
 
     private void placeStructure(Level level, BlockPos pos, LivingEntity entity) {
