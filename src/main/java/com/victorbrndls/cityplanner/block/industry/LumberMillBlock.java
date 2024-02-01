@@ -86,6 +86,9 @@ public class LumberMillBlock extends Block implements EntityBlock {
                 }
             }
 
+            StructureTemplate.Palette palette = struct.palettes.get(0);
+            palette.blocks().removeIf(blockInfo -> blockInfo.state().isAir());
+
             struct.placeInWorld(
                     serverLevel, pos.offset(xOffset, 0, zOffset), pos, settings, null, 2
             );
