@@ -2,6 +2,7 @@ package com.victorbrndls.cityplanner.item;
 
 import com.victorbrndls.cityplanner.CityPlannerMod;
 import com.victorbrndls.cityplanner.block.CityPlannerBlocks;
+import com.victorbrndls.cityplanner.city.structure.CityStructure;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.DeferredRegister;
@@ -19,25 +20,27 @@ public class CityPlannerItems {
     );
 
     // Industry
-    public static final RegistryObject<Item> LUMBER_MILL_ITEM = ITEMS.register("lumber_mill", LumberMillItem::new);
+    public static final RegistryObject<Item> LUMBER_MILL_ITEM = ITEMS.register("lumber_mill", () ->
+            new StructureItem(CityPlannerBlocks.LUMBER_MILL_BLOCK.get(), CityStructure.LUMBER_MILL)
+    );
     public static final RegistryObject<Item> VEGETABLE_FARM_ITEM = ITEMS.register("vegetable_farm", () ->
-            new BlockItem(CityPlannerBlocks.VEGETABLE_FARM_BLOCK.get(), new Item.Properties())
+            new StructureItem(CityPlannerBlocks.VEGETABLE_FARM_BLOCK.get(), CityStructure.VEGETABLE_FARM)
     );
     public static final RegistryObject<Item> WATER_WELL_ITEM = ITEMS.register("water_well", () ->
-            new BlockItem(CityPlannerBlocks.WATER_WELL_BLOCK.get(), new Item.Properties())
+            new StructureItem(CityPlannerBlocks.WATER_WELL_BLOCK.get(), CityStructure.WATER_WELL)
     );
     public static final RegistryObject<Item> FURNITURE_FACTORY_ITEM = ITEMS.register("furniture_factory", () ->
-            new BlockItem(CityPlannerBlocks.FURNITURE_FACTORY_BLOCK.get(), new Item.Properties())
+            new StructureItem(CityPlannerBlocks.FURNITURE_FACTORY_BLOCK.get(), CityStructure.FURNITURE_FACTORY)
     );
 
     // Industry - Energy
     public static final RegistryObject<Item> WIND_TURBINE_ITEM = ITEMS.register("wind_turbine", () ->
-            new BlockItem(CityPlannerBlocks.WIND_TURBINE_BLOCK.get(), new Item.Properties())
+            new StructureItem(CityPlannerBlocks.WIND_TURBINE_BLOCK.get(), CityStructure.WIND_MILL)
     );
 
     // Housing
     public static final RegistryObject<Item> RESIDENCE_LEVEL_1 = ITEMS.register("residence_level_1", () ->
-            new BlockItem(CityPlannerBlocks.RESIDENCE_LEVEL_1_BLOCK.get(), new Item.Properties().stacksTo(1))
+            new StructureItem(CityPlannerBlocks.RESIDENCE_LEVEL_1_BLOCK.get(), CityStructure.RESIDENCE_1)
     );
 
 }

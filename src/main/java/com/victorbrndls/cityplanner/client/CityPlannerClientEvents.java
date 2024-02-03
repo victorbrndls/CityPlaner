@@ -40,8 +40,9 @@ public class CityPlannerClientEvents {
 
         var buffer = MultiBufferSource.immediate(new BufferBuilder(1536));
         Vec3 camera = Minecraft.getInstance().gameRenderer.getMainCamera().getPosition();
+        var direction = Minecraft.getInstance().player.getDirection();
 
-        CityPlannerClient.GHOST_STRUCTURES.renderAll(ms, buffer, camera);
+        CityPlannerClient.GHOST_STRUCTURES.renderAll(ms, buffer, camera, direction);
 
         buffer.endLastBatch();
         ms.popPose();

@@ -1,7 +1,6 @@
 package com.victorbrndls.cityplanner.item;
 
 import com.victorbrndls.cityplanner.CityPlannerMod;
-import com.victorbrndls.cityplanner.block.CityPlannerBlocks;
 import com.victorbrndls.cityplanner.city.structure.CityStructure;
 import com.victorbrndls.cityplanner.client.CityPlannerClient;
 import com.victorbrndls.cityplanner.client.ClientStructureCache;
@@ -11,12 +10,19 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraftforge.network.PacketDistributor;
 
-public class LumberMillItem extends BlockItem {
+public class StructureItem extends BlockItem {
 
-    public LumberMillItem() {
-        super(CityPlannerBlocks.LUMBER_MILL_BLOCK.get(), new Item.Properties());
+    private final CityStructure structure;
+
+    public StructureItem(
+            Block block,
+            CityStructure structure
+    ) {
+        super(block, new Item.Properties());
+        this.structure = structure;
     }
 
     // TODO: find better way to request structure
@@ -27,14 +33,18 @@ public class LumberMillItem extends BlockItem {
 
         ClientStructureCache structureCache = CityPlannerClient.STRUCTURE_CACHE;
 
-        if (structureCache.shouldRequest(CityStructure.LUMBER_MILL)) {
-            structureCache.requestMade(CityStructure.LUMBER_MILL);
+        if (structureCache.shouldRequest(structure)) {
+            structureCache.requestMade(structure);
 
-            CityPlannerMod.LOGGER.info("Requesting structure: LUMBER_MILL");
+            CityPlannerMod.LOGGER.info("Requesting structure: " + structure.name());
             CityPlannerMod.CHANNEL.send(
-                    new RequestCityStructureMessage(CityStructure.LUMBER_MILL),
+                    new RequestCityStructureMessage(structure),
                     PacketDistributor.SERVER.noArg()
             );
         }
+    }
+
+    public CityStructure getStructure() {
+        return structure;
     }
 }

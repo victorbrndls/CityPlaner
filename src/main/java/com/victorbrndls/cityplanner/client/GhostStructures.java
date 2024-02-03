@@ -4,8 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.victorbrndls.cityplanner.city.structure.CityStructure;
 import com.victorbrndls.cityplanner.city.structure.CityStructureOrientation;
-import com.victorbrndls.cityplanner.city.structure.LumberMillCityStructureOrientation;
-import com.victorbrndls.cityplanner.item.CityPlannerItems;
+import com.victorbrndls.cityplanner.item.StructureItem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -39,30 +38,31 @@ public class GhostStructures {
 
     public void tick() {
         Item mainHandItem = Minecraft.getInstance().player.getMainHandItem().getItem();
-        var isStructure = mainHandItem == CityPlannerItems.LUMBER_MILL_ITEM.get();
-
-        if (!isStructure) {
+        if (!(mainHandItem instanceof StructureItem structureItem)) {
             ghosts.clear();
             return;
         }
 
-        if (ghosts.contains(CityStructure.LUMBER_MILL)) return;
-        ghosts.add(CityStructure.LUMBER_MILL);
+        CityStructure structure = structureItem.getStructure();
+
+        if (ghosts.contains(structure)) return;
+        ghosts.add(structure);
     }
 
-    public void renderAll(PoseStack ms, MultiBufferSource buffer, Vec3 camera) {
-        ghosts.forEach(structure -> render(ms, buffer, camera, structure));
+    public void renderAll(PoseStack ms, MultiBufferSource buffer, Vec3 camera, Direction direction) {
+        ghosts.forEach(structure -> {
+            render(ms, buffer, camera, direction, structure);
+        });
     }
 
-    private void render(PoseStack ms, MultiBufferSource buffer, Vec3 camera, CityStructure structure) {
+    private void render(PoseStack ms, MultiBufferSource buffer, Vec3 camera, Direction direction, CityStructure structure) {
         var structureInfo = CityPlannerClient.STRUCTURE_CACHE.get(structure);
         if (structureInfo == null) return;
 
         var blocks = structureInfo.pos();
         var states = structureInfo.blockState();
 
-        var direction = Minecraft.getInstance().player.getDirection();
-        var orientation = new LumberMillCityStructureOrientation(direction);
+        var orientation = CityPlannerClient.STRUCTURE_ORIENTATION_REGISTRY.getOrientation(structure, direction);
 
         for (int i = 0; i < blocks.size(); i++) {
             render(ms, buffer, camera, blocks.get(i), states.get(i), orientation);

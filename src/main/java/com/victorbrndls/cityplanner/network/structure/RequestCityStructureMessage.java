@@ -33,6 +33,11 @@ public class RequestCityStructureMessage {
 
         var resourcePath = switch (structure) {
             case LUMBER_MILL -> "lumber_mill";
+            case WATER_WELL -> "water_well";
+            case VEGETABLE_FARM -> "vegetable_farm";
+            case RESIDENCE_1 -> "house_1";
+            case WIND_MILL -> "wind_mill";
+            case FURNITURE_FACTORY -> "furniture_factory";
         };
 
         // TODO: cache on server side too
