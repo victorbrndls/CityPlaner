@@ -48,7 +48,6 @@ public class LumberMillBlock extends Block implements EntityBlock {
         var structureManager = serverLevel.getStructureManager();
 
         Optional<StructureTemplate> structureTemplate = structureManager.get(new ResourceLocation("cityplanner", "lumber_mill"));
-
         structureTemplate.ifPresent((struct) -> {
             StructurePlaceSettings settings = new StructurePlaceSettings();
             var xOffset = 0;
