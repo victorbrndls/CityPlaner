@@ -1,7 +1,7 @@
 package com.victorbrndls.cityplanner.city.milestone;
 
 import com.victorbrndls.cityplanner.city.City;
-import com.victorbrndls.cityplanner.network.Level9999MilestoneMessage;
+import com.victorbrndls.cityplanner.network.milestone.Level9999MilestoneMessage;
 
 public class Level9999Milestone implements Milestone {
 

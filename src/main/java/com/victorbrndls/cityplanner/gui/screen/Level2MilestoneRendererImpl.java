@@ -2,8 +2,7 @@ package com.victorbrndls.cityplanner.gui.screen;
 
 import com.victorbrndls.cityplanner.gui.CityPlannerColors;
 import com.victorbrndls.cityplanner.gui.CityPlannerGuiResources;
-import com.victorbrndls.cityplanner.network.Level2MilestoneMessage;
-import net.minecraft.client.Minecraft;
+import com.victorbrndls.cityplanner.network.milestone.Level2MilestoneMessage;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 

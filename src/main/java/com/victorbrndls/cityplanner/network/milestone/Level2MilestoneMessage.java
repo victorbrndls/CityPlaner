@@ -1,4 +1,4 @@
-package com.victorbrndls.cityplanner.network;
+package com.victorbrndls.cityplanner.network.milestone;
 
 import com.victorbrndls.cityplanner.city.City;
 import com.victorbrndls.cityplanner.city.milestone.Level2Milestone;

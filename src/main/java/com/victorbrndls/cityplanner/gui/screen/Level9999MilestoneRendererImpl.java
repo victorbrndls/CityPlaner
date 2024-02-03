@@ -1,6 +1,6 @@
 package com.victorbrndls.cityplanner.gui.screen;
 
-import com.victorbrndls.cityplanner.network.Level9999MilestoneMessage;
+import com.victorbrndls.cityplanner.network.milestone.Level9999MilestoneMessage;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 
