@@ -32,6 +32,12 @@ public class CityPlannerNetwork {
                 .encoder(Level9999MilestoneMessage::encode)
                 .consumerMainThread(Level9999MilestoneMessage::handle)
                 .add();
+
+        CHANNEL.messageBuilder(StructureMessage.class, NetworkDirection.PLAY_TO_CLIENT)
+                .decoder(StructureMessage::new)
+                .encoder(StructureMessage::write)
+                .consumerMainThread(StructureMessage::handle)
+                .add();
     }
 
 }

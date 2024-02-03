@@ -1,4 +1,4 @@
-package com.victorbrndls.cityplanner;
+package com.victorbrndls.cityplanner.client;
 
 public class CityPlannerClient {
 

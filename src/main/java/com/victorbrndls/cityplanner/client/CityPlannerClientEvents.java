@@ -1,11 +1,13 @@
-package com.victorbrndls.cityplanner;
+package com.victorbrndls.cityplanner.client;
 
 import com.mojang.blaze3d.vertex.BufferBuilder;
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.victorbrndls.cityplanner.gui.CityStatsRenderer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.RenderGuiEvent;
 import net.minecraftforge.client.event.RenderLevelStageEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -22,6 +24,11 @@ public class CityPlannerClientEvents {
         //Level world = Minecraft.getInstance().level;
 
         CityPlannerClient.GHOST_BLOCKS.tick();
+    }
+
+    @SubscribeEvent
+    public static void guiRendered(final RenderGuiEvent.Post event) {
+        CityStatsRenderer.render(event.getGuiGraphics(), event.getPartialTick());
     }
 
     @SubscribeEvent

@@ -2,6 +2,7 @@ package com.victorbrndls.cityplanner.block.industry;
 
 import com.victorbrndls.cityplanner.CityPlannerMod;
 import com.victorbrndls.cityplanner.helper.CityHelper;
+import com.victorbrndls.cityplanner.network.StructureMessage;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
@@ -17,6 +18,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 import net.minecraft.world.level.material.PushReaction;
+import net.minecraftforge.network.PacketDistributor;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
@@ -79,6 +81,14 @@ public class LumberMillBlock extends Block implements EntityBlock {
 
             struct.placeInWorld(
                     serverLevel, pos.offset(xOffset, 0, zOffset), pos, settings, null, 2
+            );
+
+            var poss = palette.blocks.stream().map(StructureTemplate.StructureBlockInfo::pos).toList();
+            var states = palette.blocks.stream().map(StructureTemplate.StructureBlockInfo::state).toList();
+
+            CityPlannerMod.CHANNEL.send(
+                    new StructureMessage(poss, states),
+                    PacketDistributor.ALL.noArg()
             );
         });
     }

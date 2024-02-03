@@ -1,4 +1,4 @@
-package com.victorbrndls.cityplanner;
+package com.victorbrndls.cityplanner.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -27,6 +27,10 @@ public class GhostBlocks {
 
     private final List<Entry> ghosts = new ArrayList<>();
 
+    public void add(Entry entry) {
+        ghosts.add(entry);
+    }
+
     public void tick() {
         if (ghosts.isEmpty()) return;
 
@@ -45,8 +49,8 @@ public class GhostBlocks {
         HitResult hitResult = Minecraft.getInstance().hitResult;
         if (hitResult == null) return;
 
-        BlockState blockState = params.getState();
-        BlockPos blockPos = params.getPos();
+        BlockState blockState = params.state();
+        BlockPos blockPos = params.pos();
 
         Vec3 pos = hitResult.getLocation().add(blockPos.getX(), blockPos.getY(), blockPos.getZ());
 
@@ -111,14 +115,14 @@ public class GhostBlocks {
         }
     }
 
-    static class Entry {
+    public static class Entry {
 
         private final GhostBlockParams params;
         private int ticksToLive;
 
         public Entry(GhostBlockParams params) {
             this.params = params;
-            ticksToLive = 5;
+            ticksToLive = 500000000;
         }
 
         public boolean isAlive() {
