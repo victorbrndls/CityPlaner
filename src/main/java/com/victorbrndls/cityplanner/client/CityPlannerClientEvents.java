@@ -22,8 +22,7 @@ public class CityPlannerClientEvents {
             return;
 
         //Level world = Minecraft.getInstance().level;
-
-        CityPlannerClient.GHOST_BLOCKS.tick();
+        CityPlannerClient.GHOST_STRUCTURES.tick();
     }
 
     @SubscribeEvent
@@ -42,7 +41,7 @@ public class CityPlannerClientEvents {
         var buffer = MultiBufferSource.immediate(new BufferBuilder(1536));
         Vec3 camera = Minecraft.getInstance().gameRenderer.getMainCamera().getPosition();
 
-        CityPlannerClient.GHOST_BLOCKS.renderAll(ms, buffer, camera);
+        CityPlannerClient.GHOST_STRUCTURES.renderAll(ms, buffer, camera);
 
         buffer.endLastBatch();
         ms.popPose();

@@ -10,11 +10,15 @@ import java.util.Map;
 
 public class ClientStructureCache {
 
-    private static final Map<CityStructure, CityStructureInfo> STRUCTURE_CACHE = new HashMap<>();
-    private static final List<CityStructure> REQUESTS_IN_PROGRESS = new ArrayList<>();
+    private final Map<CityStructure, CityStructureInfo> STRUCTURE_CACHE = new HashMap<>();
+    private final List<CityStructure> REQUESTS_IN_PROGRESS = new ArrayList<>();
 
     public void add(CityStructureInfo info) {
         STRUCTURE_CACHE.put(info.structure(), info);
+    }
+
+    public CityStructureInfo get(CityStructure structure) {
+        return STRUCTURE_CACHE.get(structure);
     }
 
     public void requestMade(CityStructure structure) {

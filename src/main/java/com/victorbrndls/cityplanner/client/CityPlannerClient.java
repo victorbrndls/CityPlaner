@@ -4,6 +4,6 @@ public class CityPlannerClient {
 
     public static ClientStructureCache STRUCTURE_CACHE = new ClientStructureCache();
 
-    public static GhostBlocks GHOST_BLOCKS = new GhostBlocks();
+    public static GhostStructures GHOST_STRUCTURES = new GhostStructures();
 
 }

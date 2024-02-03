@@ -1,6 +1,7 @@
 package com.victorbrndls.cityplanner.block.industry;
 
 import com.victorbrndls.cityplanner.CityPlannerMod;
+import com.victorbrndls.cityplanner.city.structure.LumberMillCityStructureOrientation;
 import com.victorbrndls.cityplanner.helper.CityHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
@@ -11,7 +12,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.EntityBlock;
-import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
@@ -50,35 +50,21 @@ public class LumberMillBlock extends Block implements EntityBlock {
         Optional<StructureTemplate> structureTemplate = structureManager.get(new ResourceLocation("cityplanner", "lumber_mill"));
         structureTemplate.ifPresent((struct) -> {
             StructurePlaceSettings settings = new StructurePlaceSettings();
-            var xOffset = 0;
-            var zOffset = 0;
+            var cityStructureOrientation = new LumberMillCityStructureOrientation(entity.getDirection());
 
-            switch (entity.getDirection()) {
-                case NORTH -> {
-                    settings.setRotation(Rotation.CLOCKWISE_180);
-                    xOffset = 2;
-                }
-                case SOUTH -> {
-                    settings.setRotation(Rotation.NONE);
-                    xOffset = -2;
-                }
-                case WEST -> {
-                    settings.setRotation(Rotation.CLOCKWISE_90);
-                    zOffset = -2;
-                }
-                case EAST -> {
-                    settings.setRotation(Rotation.COUNTERCLOCKWISE_90);
-                    zOffset = 2;
-                }
-                default -> {
-                }
-            }
+            cityStructureOrientation.updateSettings(settings);
+            var offset = cityStructureOrientation.getOffset();
 
             StructureTemplate.Palette palette = struct.palettes.get(0);
             palette.blocks().removeIf(blockInfo -> blockInfo.state().isAir());
 
             struct.placeInWorld(
-                    serverLevel, pos.offset(xOffset, 0, zOffset), pos, settings, null, 2
+                    serverLevel,
+                    pos.offset((int) offset.x, (int) offset.y, (int) offset.z),
+                    pos,
+                    settings,
+                    null,
+                    2
             );
         });
     }
