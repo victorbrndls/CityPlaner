@@ -3,9 +3,11 @@ package com.victorbrndls.cityplanner.block.industry;
 import com.victorbrndls.cityplanner.CityPlannerMod;
 import com.victorbrndls.cityplanner.city.structure.industry.LumberMillCityStructureOrientation;
 import com.victorbrndls.cityplanner.helper.CityHelper;
+import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -63,7 +65,7 @@ public class LumberMillBlock extends Block implements EntityBlock {
                     pos.offset((int) offset.x, (int) offset.y, (int) offset.z),
                     pos,
                     settings,
-                    null,
+                    RandomSource.create(Util.getMillis()),
                     2
             );
         });
