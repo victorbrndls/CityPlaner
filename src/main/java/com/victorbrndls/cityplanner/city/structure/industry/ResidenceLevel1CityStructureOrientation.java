@@ -29,23 +29,23 @@ public class ResidenceLevel1CityStructureOrientation implements CityStructureOri
 
     @Override
     public Vec3 getCenter() {
-        return new Vec3(2, 0, 3);
+        return new Vec3(3, 0, 3);
     }
 
     @Override
     public Vec3 getOffset() {
         switch (direction) {
             case NORTH -> {
-                return new Vec3(2, 0, 0);
+                return new Vec3(3, 0, 1);
             }
             case SOUTH -> {
-                return new Vec3(-2, 0, 0);
+                return new Vec3(-3, 0, -1);
             }
             case WEST -> {
-                return new Vec3(0, 0, -2);
+                return new Vec3(1, 0, -3);
             }
             case EAST -> {
-                return new Vec3(0, 0, 2);
+                return new Vec3(-1, 0, 3);
             }
             default -> {
                 return Vec3.ZERO;
@@ -57,16 +57,16 @@ public class ResidenceLevel1CityStructureOrientation implements CityStructureOri
     public void translate(PoseStack ms) {
         switch (direction) {
             case NORTH -> {
-                ms.translate(0.5, 0, -2.5);
+                ms.translate(0.5, 0, -1.5);
             }
             case SOUTH -> {
-                ms.translate(-0.5, 0, 2.5);
+                ms.translate(-0.5, 0, 1.5);
             }
             case WEST -> {
-                ms.translate(-2.5, 0, -0.5);
+                ms.translate(-1.5, 0, -0.5);
             }
             case EAST -> {
-                ms.translate(2.5, 0, 0.5);
+                ms.translate(1.5, 0, 0.5);
             }
             default -> {
             }
