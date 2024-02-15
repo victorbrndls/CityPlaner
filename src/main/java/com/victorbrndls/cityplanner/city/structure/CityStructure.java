@@ -5,6 +5,6 @@ public enum CityStructure {
     WATER_WELL,
     VEGETABLE_FARM,
     RESIDENCE_1,
-    WIND_MILL,
+    WIND_TURBINE,
     FURNITURE_FACTORY,
 }

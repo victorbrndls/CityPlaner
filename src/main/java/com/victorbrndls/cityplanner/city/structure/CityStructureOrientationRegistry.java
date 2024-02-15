@@ -3,6 +3,7 @@ package com.victorbrndls.cityplanner.city.structure;
 import com.victorbrndls.cityplanner.city.structure.industry.LumberMillCityStructureOrientation;
 import com.victorbrndls.cityplanner.city.structure.industry.VegetableFarmCityStructureOrientation;
 import com.victorbrndls.cityplanner.city.structure.industry.WaterWellCityStructureOrientation;
+import com.victorbrndls.cityplanner.city.structure.industry.WindTurbineCityStructureOrientation;
 import net.minecraft.core.Direction;
 
 public class CityStructureOrientationRegistry {
@@ -20,7 +21,8 @@ public class CityStructureOrientationRegistry {
             }
             case RESIDENCE_1 -> {
             }
-            case WIND_MILL -> {
+            case WIND_TURBINE -> {
+                return new WindTurbineCityStructureOrientation(direction);
             }
             case FURNITURE_FACTORY -> {
             }

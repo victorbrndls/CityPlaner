@@ -35,7 +35,7 @@ public class CityPlannerItems {
 
     // Industry - Energy
     public static final RegistryObject<Item> WIND_TURBINE_ITEM = ITEMS.register("wind_turbine", () ->
-            new StructureItem(CityPlannerBlocks.WIND_TURBINE_BLOCK.get(), CityStructure.WIND_MILL)
+            new StructureItem(CityPlannerBlocks.WIND_TURBINE_BLOCK.get(), CityStructure.WIND_TURBINE)
     );
 
     // Housing

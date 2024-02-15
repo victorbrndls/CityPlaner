@@ -36,7 +36,7 @@ public class RequestCityStructureMessage {
             case WATER_WELL -> "water_well";
             case VEGETABLE_FARM -> "vegetable_farm";
             case RESIDENCE_1 -> "house_1";
-            case WIND_MILL -> "wind_mill";
+            case WIND_TURBINE -> "wind_turbine";
             case FURNITURE_FACTORY -> "furniture_factory";
         };
 
