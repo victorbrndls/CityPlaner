@@ -1,5 +1,8 @@
 package com.victorbrndls.cityplanner.city.structure;
 
+import com.victorbrndls.cityplanner.city.structure.industry.LumberMillCityStructureOrientation;
+import com.victorbrndls.cityplanner.city.structure.industry.VegetableFarmCityStructureOrientation;
+import com.victorbrndls.cityplanner.city.structure.industry.WaterWellCityStructureOrientation;
 import net.minecraft.core.Direction;
 
 public class CityStructureOrientationRegistry {
@@ -13,6 +16,7 @@ public class CityStructureOrientationRegistry {
                 return new VegetableFarmCityStructureOrientation(direction);
             }
             case WATER_WELL -> {
+                return new WaterWellCityStructureOrientation(direction);
             }
             case RESIDENCE_1 -> {
             }
@@ -22,7 +26,7 @@ public class CityStructureOrientationRegistry {
             }
         }
 
-        return new LumberMillCityStructureOrientation(direction); // TODO: remove
+        throw new UnsupportedOperationException("missing orientation for " + structure);
     }
 
 }

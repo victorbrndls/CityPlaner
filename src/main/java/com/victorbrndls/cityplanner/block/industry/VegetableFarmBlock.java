@@ -1,7 +1,7 @@
 package com.victorbrndls.cityplanner.block.industry;
 
 import com.victorbrndls.cityplanner.CityPlannerMod;
-import com.victorbrndls.cityplanner.city.structure.VegetableFarmCityStructureOrientation;
+import com.victorbrndls.cityplanner.city.structure.industry.VegetableFarmCityStructureOrientation;
 import com.victorbrndls.cityplanner.helper.CityHelper;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;

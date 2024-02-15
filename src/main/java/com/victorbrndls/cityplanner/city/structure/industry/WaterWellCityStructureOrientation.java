@@ -1,16 +1,17 @@
-package com.victorbrndls.cityplanner.city.structure;
+package com.victorbrndls.cityplanner.city.structure.industry;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.victorbrndls.cityplanner.city.structure.CityStructureOrientation;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
 import net.minecraft.world.phys.Vec3;
 
-public class VegetableFarmCityStructureOrientation implements CityStructureOrientation {
+public class WaterWellCityStructureOrientation implements CityStructureOrientation {
 
     private final Direction direction;
 
-    public VegetableFarmCityStructureOrientation(Direction direction) {
+    public WaterWellCityStructureOrientation(Direction direction) {
         this.direction = direction;
     }
 
@@ -28,23 +29,23 @@ public class VegetableFarmCityStructureOrientation implements CityStructureOrien
 
     @Override
     public Vec3 getCenter() {
-        return new Vec3(2, 0, 2);
+        return new Vec3(1, 0, 1);
     }
 
     @Override
     public Vec3 getOffset() {
         switch (direction) {
             case NORTH -> {
-                return new Vec3(3, -1, 0);
+                return new Vec3(1, 0, 0);
             }
             case SOUTH -> {
-                return new Vec3(-3, -1, 0);
+                return new Vec3(-1, 0, 0);
             }
             case WEST -> {
-                return new Vec3(0, -1, -3);
+                return new Vec3(0, 0, -1);
             }
             case EAST -> {
-                return new Vec3(0, -1, 3);
+                return new Vec3(0, 0, 1);
             }
             default -> {
                 return Vec3.ZERO;
@@ -56,16 +57,16 @@ public class VegetableFarmCityStructureOrientation implements CityStructureOrien
     public void translate(PoseStack ms) {
         switch (direction) {
             case NORTH -> {
-                ms.translate(1.5, -0.99, -1.5);
+                ms.translate(0.5, 0, -0.5);
             }
             case SOUTH -> {
-                ms.translate(-1.5, -0.99, 1.5);
+                ms.translate(-0.5, 0, 0.5);
             }
             case WEST -> {
-                ms.translate(-1.5, -0.99, -1.5);
+                ms.translate(-0.5, 0, -0.5);
             }
             case EAST -> {
-                ms.translate(1.5, -0.99, 1.5);
+                ms.translate(0.5, 0, 0.5);
             }
             default -> {
             }

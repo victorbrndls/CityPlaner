@@ -1,6 +1,7 @@
-package com.victorbrndls.cityplanner.city.structure;
+package com.victorbrndls.cityplanner.city.structure.industry;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.victorbrndls.cityplanner.city.structure.CityStructureOrientation;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;

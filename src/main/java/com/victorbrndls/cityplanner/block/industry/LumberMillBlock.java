@@ -1,7 +1,7 @@
 package com.victorbrndls.cityplanner.block.industry;
 
 import com.victorbrndls.cityplanner.CityPlannerMod;
-import com.victorbrndls.cityplanner.city.structure.LumberMillCityStructureOrientation;
+import com.victorbrndls.cityplanner.city.structure.industry.LumberMillCityStructureOrientation;
 import com.victorbrndls.cityplanner.helper.CityHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
