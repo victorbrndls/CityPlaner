@@ -36,16 +36,16 @@ public class WaterWellCityStructureOrientation implements CityStructureOrientati
     public Vec3 getOffset() {
         switch (direction) {
             case NORTH -> {
-                return new Vec3(1, 0, 0);
+                return new Vec3(1, -1, 0);
             }
             case SOUTH -> {
-                return new Vec3(-1, 0, 0);
+                return new Vec3(-1, -1, 0);
             }
             case WEST -> {
-                return new Vec3(0, 0, -1);
+                return new Vec3(0, -1, -1);
             }
             case EAST -> {
-                return new Vec3(0, 0, 1);
+                return new Vec3(0, -1, 1);
             }
             default -> {
                 return Vec3.ZERO;
@@ -57,16 +57,16 @@ public class WaterWellCityStructureOrientation implements CityStructureOrientati
     public void translate(PoseStack ms) {
         switch (direction) {
             case NORTH -> {
-                ms.translate(0.5, 0, -0.5);
+                ms.translate(0.5, -0.99, -0.5);
             }
             case SOUTH -> {
-                ms.translate(-0.5, 0, 0.5);
+                ms.translate(-0.5, -0.99, 0.5);
             }
             case WEST -> {
-                ms.translate(-0.5, 0, -0.5);
+                ms.translate(-0.5, -0.99, -0.5);
             }
             case EAST -> {
-                ms.translate(0.5, 0, 0.5);
+                ms.translate(0.5, -0.99, 0.5);
             }
             default -> {
             }
